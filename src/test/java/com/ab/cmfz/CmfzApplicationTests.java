@@ -18,7 +18,6 @@ public class CmfzApplicationTests extends TmallApplicationTests {
     public void contextLoads() {
         User user = userDao.selectByPrimaryKey(12);
         System.out.println(user);
-
     }
 
 }
