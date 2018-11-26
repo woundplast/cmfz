@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- %d为时间，%msg为自己要输出的信息，%n为换行 -->
+            <pattern>
+                %d -+- %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+    </root>
+    <logger name="com.baizhi.springboot.dao" level="debug"/>
+    <logger name="com.baizhi.springboot.controller" level="debug"/>
+
+</configuration>
