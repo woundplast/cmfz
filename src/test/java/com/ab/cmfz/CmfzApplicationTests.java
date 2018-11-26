@@ -11,7 +11,7 @@ public class CmfzApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.pringln(15);
+        System.out.println(15);
     }
 
 }
