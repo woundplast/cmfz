@@ -1,5 +1,5 @@
 server:
-  context-path: /springboot-test1
+  context-path: /cmfz
   jsp-servlet:
     init-parameters:
       development: true
