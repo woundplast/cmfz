@@ -2,6 +2,8 @@ package com.ab.cmfz.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Menu {
     private Integer id;
@@ -14,4 +16,5 @@ public class Menu {
 
     private String url;
 
+    List<Menu> menus;
 }

@@ -17,11 +17,16 @@
                 type: "post",
                 //data:{},
                 success: function (data) {
+
                     for (var i = 0; i < data.length; i++) {
+                        var sonTitle = '';
+                        for (var j = 0; j < (data[i].menus).length; j++) {
+                            sonTitle += "<span href='#' width:211px;>" + data[i].menus[j].title + "</span><br/>";
+                        }
                         $('#aa').accordion('add', {
-                            icon: "",
+                            iconCls: data[i].iconcls,
                             title: data[i].title,
-                            content: "",
+                            content: sonTitle,
                             selected: false
                         });
 

@@ -22,11 +22,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
     MenuDao menuDao;
     @Test
     public void contextLoads() {
-        User user = userDao.selectByPrimaryKey(1);
-        System.out.println(user);
 
-        List<Menu> menuList = menuDao.quertAll();
-        System.out.println(menuList);
     }
 
     @Test

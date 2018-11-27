@@ -1,97 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ab.cmfz.dao.MenuDao">
-    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Menu">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="iconCls" property="iconcls" jdbcType="VARCHAR"/>
-        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
-        <result column="url" property="url" jdbcType="VARCHAR"/>
+    <resultMap id="MenuMap" type="Menu">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="iconCls" property="iconcls"/>
+        <result column="url" property="url"/>
+        <collection property="menus" ofType="Menu">
+            <id column="mid" property="id"/>
+            <result column="mtitle" property="title"/>
+            <result column="miconCls" property="iconcls"/>
+            <result column="murl" property="url"/>
+        </collection>
     </resultMap>
-    <sql id="Base_Column_List">
-    id, title, iconCls, parent_id, url
-  </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from menu
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from menu
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="com.ab.cmfz.entity.Menu">
-    insert into menu (id, title, iconCls, 
-      parent_id, url)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Menu">
-        insert into menu
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="iconcls != null">
-                iconCls,
-            </if>
-            <if test="parentId != null">
-                parent_id,
-            </if>
-            <if test="url != null">
-                url,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="iconcls != null">
-                #{iconcls,jdbcType=VARCHAR},
-            </if>
-            <if test="parentId != null">
-                #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ab.cmfz.entity.Menu">
-        update menu
-        <set>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="iconcls != null">
-                iconCls = #{iconcls,jdbcType=VARCHAR},
-            </if>
-            <if test="parentId != null">
-                parent_id = #{parentId,jdbcType=INTEGER},
-            </if>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.ab.cmfz.entity.Menu">
-    update menu
-    set title = #{title,jdbcType=VARCHAR},
-      iconCls = #{iconcls,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      url = #{url,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 
-    <select id="quertAll" resultType="Menu">
-        select * from menu
+    <select id="quertAll" resultMap="MenuMap">
+        SELECT t1.id id ,t1.title title ,t1.iconCls iconCls, t1.url url,
+        t2.id mid ,t2.title mtitle,t2.iconCls miconCls ,t2.url murl
+        from menu t1 LEFT  JOIN menu t2
+        on t1.id=t2.parent_id  where t1.parent_id is null
     </select>
 </mapper>
