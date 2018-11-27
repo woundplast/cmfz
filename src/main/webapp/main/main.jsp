@@ -17,11 +17,11 @@
                 type: "post",
                 //data:{},
                 success: function (data) {
-
+                    <!--菜单处理-->
                     for (var i = 0; i < data.length; i++) {
                         var sonTitle = '';
                         for (var j = 0; j < (data[i].menus).length; j++) {
-                            sonTitle += "<span href='#' width:211px;>" + data[i].menus[j].title + "</span><br/>";
+                            sonTitle += '<span style="color:#f00;" onclick="openTitle(this)">' + data[i].menus[j].title + '</span><br/>';
                         }
                         $('#aa').accordion('add', {
                             iconCls: data[i].iconcls,
@@ -36,13 +36,30 @@
 
             });
 
-            $('#aa').accordion('add', {
-                title: '',
-                content: '',
-                selected: false
-            });
         });
-        <!--菜单处理-->
+
+        function openTitle(data) {
+            //console.log(data[i].menus[j].title);
+            var sonTitle = $(data).html();
+            //alert(sonTitle)
+            //标题是node.text的页签是否存在
+            var isExists = $("#tt").tabs("exists", sonTitle);
+            if (isExists) {
+                //存在
+                $("#tt").tabs("select", sonTitle);
+            } else {
+                //不存在
+                $("#tt").tabs("add", {
+                    title: sonTitle,
+                    closable: true,
+                    iconCls: "icon-arrow_nsew",
+                    content: sonTitle
+                    //content:'<iframe src="bookList.jsp?id='+node.id+'" width="100%" height="100%"></iframe>'
+
+                });
+            }
+
+        }
 
     </script>
 
