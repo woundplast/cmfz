@@ -7,7 +7,7 @@ import java.util.Date;
 public class User {
     private Integer id;
 
-    private String phonenum;
+    private String phoneNum;
 
     private String username;
 

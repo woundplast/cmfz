@@ -90,4 +90,8 @@
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="quertAll" resultType="Menu">
+        select * from menu
+    </select>
 </mapper>

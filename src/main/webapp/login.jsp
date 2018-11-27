@@ -14,24 +14,73 @@
     <script type="text/javascript" src="script/common.js"></script>
     <script type="text/javascript">
 
+
         $(function () {
             //点击更换验证码：
             $("#captchaImage").click(function () {//点击更换验证码
-                alert("自己做");
+                //alert("自己做");
+                $(this).prop("src", "getKaptcha?t=" + new Date().getTime());
             });
 
-            //  form 表单提交
-            $("#loginForm").bind("submit", function () {
-                alert("自己做");
-                return false;
-            });
         });
+
+        /*===验证用户名===*/
+        function textphoneNum() {
+            var textphoneNum = $("#phoneNum").val();
+            if (textphoneNum.length < 1) {
+                $("#phoneNumspan").html("不能为空");
+                return false;
+            } else {
+                $("#phoneNumspan").html("");
+                return true;
+            }
+            return true;
+        }
+
+        /*===验证用户名END===*/
+
+        /*===验证密码===*/
+        function textpassword() {
+            var textpassword = $("#password").val();
+            if (textpassword.length < 1) {
+                $("#passwordspan").html("不能为空");
+                return false;
+            } else {
+                $("#passwordspan").html("");
+                return true;
+            }
+        }
+
+        /*===验证密码END===*/
+
+
+        /*===验证码===*/
+        function tesxtCode() {
+            var textCode = $("#enCode").val();
+            if (textCode.length < 1) {
+                $("#textCode").html("不能为空");
+                return false;
+            } else {
+                $("#textCode").html("");
+                return true;
+            }
+
+        }
+
+        /*===验证码END===*/
+
+        function checkform() {
+            if (!textphoneNum() || !textpassword() || !tesxtCode()) {
+                return false;
+            }
+            return true;
+        }
     </script>
 </head>
 <body>
 
 <div class="login">
-    <form id="loginForm" action="../back/index.html" method="post">
+    <form id="loginForm" action="${pageContext.request.contextPath}/login" method="post" onsubmit="return checkform()">
 
         <table>
             <tbody>
@@ -43,7 +92,9 @@
                     用户名:
                 </th>
                 <td>
-                    <input type="text" name="user.name" class="text" value="xxx" maxlength="20"/>
+                    <input type="text" id="phoneNum" name="phoneNum" class="text" value="" maxlength="20"
+                           onblur="textphoneNum()"/>
+                    <span id="phoneNumspan"></span>
                 </td>
             </tr>
             <tr>
@@ -51,8 +102,11 @@
                     密&nbsp;&nbsp;&nbsp;码:
                 </th>
                 <td>
-                    <input type="password" name="user.password" class="text" value="xxx" maxlength="20"
+                    <input type="password" id="password" name="password" class="text" value="" maxlength="20"
+                           onblur="textpassword()"
                            autocomplete="off"/>
+                    <span id="passwordspan"></span>
+
                 </td>
             </tr>
 
@@ -60,8 +114,12 @@
                 <td>&nbsp;</td>
                 <th>验证码:</th>
                 <td>
-                    <input type="text" id="enCode" name="enCode" class="text captcha" maxlength="4" autocomplete="off"/>
-                    <img id="captchaImage" class="captchaImage" src="img/captcha.jpg" title="点击更换验证码"/>
+                    <input type="text" id="enCode" name="textcode" class="text captcha" maxlength="4" autocomplete="off"
+                           onblur="tesxtCode()"/>
+                    <img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/getKaptcha"
+                         title="点击更换验证码"/>
+                    <div id="textCode"></div>
+                    <span style="font-size: 10px;color: red; font-weight: bolder;">${requestScope.errorMessage }</span>
                 </td>
             </tr>
             <tr>
@@ -76,9 +134,11 @@
                 <td>&nbsp;</td>
                 <th>&nbsp;</th>
                 <td>
-                    <input type="button" class="homeButton" value="" onclick="location.href='/'"><input type="submit"
-                                                                                                        class="loginButton"
-                                                                                                        value="登录">
+                    <input type="button" class="homeButton" value=""
+                           onclick="location.href='${pageContext.request.contextPath}/main/main.jsp'"><input
+                        type="submit"
+                        class="loginButton"
+                        value="登录">
                 </td>
             </tr>
             </tbody>

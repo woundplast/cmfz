@@ -185,4 +185,8 @@
       date = #{date,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="selectUserByphoneNumAndPassword" resultType="User">
+    select * from user where phoneNum=#{phoneNum} and password=#{password}
+  </select>
 </mapper>

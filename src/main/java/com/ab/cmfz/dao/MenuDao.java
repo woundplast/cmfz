@@ -2,6 +2,8 @@ package com.ab.cmfz.dao;
 
 import com.ab.cmfz.entity.Menu;
 
+import java.util.List;
+
 public interface MenuDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface MenuDao {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+
+    List<Menu> quertAll();
 }
