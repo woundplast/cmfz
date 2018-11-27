@@ -25,10 +25,9 @@ body {
     font: 12px tahoma, Arial, Verdana, sans-serif;
     color: #666666;
     background-color: #ffffff;
-    _background-image: url(about: blank);
+    _background-image: url(about:blank);
     _background-attachment: fixed;
 }
-
 a {
     color: #666666;
     text-decoration: none;
@@ -834,7 +833,7 @@ span.loadingBar {
     display: -moz-inline-stack;
     zoom: 1;
     *display: inline;
-    background: url(../img/loading_bar.gif) center no-repeat;
+    /*background: url(../img/loading_bar.gif) center no-repeat;*/
 }
 
 /* ---------- Pagination ---------- */
@@ -1250,7 +1249,6 @@ div.ac_results .ac_over {
     color: #333333;
     background-color: #f8fbff;
 }
-
 .moretable td {
     line-height: 25px;
     padding: 5px;
