@@ -3,7 +3,6 @@ package com.ab.cmfz.entity;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
 public class User {
     private Integer id;
@@ -31,5 +30,6 @@ public class User {
     private Integer status;
 
     private Date date;
+
 
 }
