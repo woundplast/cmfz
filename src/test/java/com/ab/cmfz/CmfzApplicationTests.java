@@ -16,7 +16,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
     UserDao userDao;
     @Test
     public void contextLoads() {
-        User user = userDao.selectByPrimaryKey(12);
+        User user = userDao.selectByPrimaryKey(1);
         System.out.println(user);
     }
 

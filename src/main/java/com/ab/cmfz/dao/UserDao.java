@@ -1,6 +1,5 @@
 package com.ab.cmfz.dao;
 
-
 import com.ab.cmfz.entity.User;
 
 public interface UserDao {
