@@ -21,7 +21,8 @@
                     for (var i = 0; i < data.length; i++) {
                         var sonTitle = '';
                         for (var j = 0; j < (data[i].menus).length; j++) {
-                            sonTitle += '<span style="color:#f00;" onclick="openTitle(this)">' + data[i].menus[j].title + '</span><br/>';
+                            sonTitle += '<div style="color:#f00; width:211px;  text-align: center; font-size: 20px' +
+                                '" onclick="openTitle(this)">' + data[i].menus[j].title + '</div>';
                         }
                         $('#aa').accordion('add', {
                             iconCls: data[i].iconcls,
@@ -42,7 +43,7 @@
             //console.log(data[i].menus[j].title);
             var sonTitle = $(data).html();
             //alert(sonTitle)
-            //标题是node.text的页签是否存在
+            //标题页签是否存在
             var isExists = $("#tt").tabs("exists", sonTitle);
             if (isExists) {
                 //存在
