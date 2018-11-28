@@ -49,7 +49,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthIterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/getKaptcha", "/login", "/regist");
+                .excludePathPatterns("/**");
         /*.excludePathPatterns("/getKaptcha","/login","/regist");*/
 
     }

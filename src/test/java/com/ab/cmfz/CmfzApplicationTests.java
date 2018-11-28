@@ -1,9 +1,12 @@
 package com.ab.cmfz;
 
 import com.ab.cmfz.dao.MenuDao;
+import com.ab.cmfz.dao.SlideDao;
 import com.ab.cmfz.dao.UserDao;
 import com.ab.cmfz.entity.Menu;
+import com.ab.cmfz.entity.Slide;
 import com.ab.cmfz.entity.User;
+import com.ab.cmfz.service.SlideService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,16 @@ public class CmfzApplicationTests extends TmallApplicationTests {
     UserDao userDao;
     @Autowired
     MenuDao menuDao;
+    @Autowired
+    SlideDao slideDao;
+    @Autowired
+    SlideService slideService;
     @Test
     public void contextLoads() {
+        int conut = slideDao.getConut();
+        System.out.println(conut);
+        List<Slide> userByPage = slideDao.getSlideByPage(1, 3);
+        System.out.println(userByPage);
 
     }
 

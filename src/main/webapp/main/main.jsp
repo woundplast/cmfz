@@ -10,6 +10,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.edatagrid.js"></script>
     <script type="text/javascript">
         $(function () {
             $.ajax({
@@ -18,20 +20,24 @@
                 //data:{},
                 success: function (data) {
                     <!--菜单处理-->
-                    for (var i = 0; i < data.length; i++) {
+                    $.each(data, function (index, first) {
                         var sonTitle = '';
-                        for (var j = 0; j < (data[i].menus).length; j++) {
-                            sonTitle += '<div style="color:#f00; width:211px;  text-align: center; font-size: 20px' +
-                                '" onclick="openTitle(this)">' + data[i].menus[j].title + '</div>';
-                        }
-                        $('#aa').accordion('add', {
-                            iconCls: data[i].iconcls,
-                            title: data[i].title,
-                            content: sonTitle,
-                            selected: false
+                        $.each(first.menus, function (indexs, menus) {
+                            sonTitle += "<div style=\"text-align: center;\"" +
+                                " onclick=\"openTitle('" + menus.title + "','" + menus.iconCls + "','" + menus.url + "')\">" +
+                                "<a  class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-pencil'\" " +
+                                "style=\"width: 211px;\">" + menus.title + "</a></div>";
+
                         });
 
-                    }
+                        $('#aa').accordion('add', {
+                            iconCls: first.iconcls,
+                            title: first.title,
+                            content: sonTitle,
+                            selected: true
+                        });
+
+                    });
                 },
                 dateType: "json"
 
@@ -39,23 +45,21 @@
 
         });
 
-        function openTitle(data) {
-            //console.log(data[i].menus[j].title);
-            var sonTitle = $(data).html();
-            //alert(sonTitle)
+        function openTitle(title, iconCls, url) {
             //标题页签是否存在
-            var isExists = $("#tt").tabs("exists", sonTitle);
+            var isExists = $("#tt").tabs("exists", title);
             if (isExists) {
                 //存在
-                $("#tt").tabs("select", sonTitle);
+                $("#tt").tabs("select", title);
             } else {
                 //不存在
                 $("#tt").tabs("add", {
-                    title: sonTitle,
+                    title: title,
                     closable: true,
-                    iconCls: "icon-arrow_nsew",
-                    content: sonTitle
-                    //content:'<iframe src="bookList.jsp?id='+node.id+'" width="100%" height="100%"></iframe>'
+                    iconCls: iconCls,
+                    //href:"${pageContext.request.contextPath}"+url,
+                    content: '<iframe src="${pageContext.request.contextPath}' + url + '" width="100%" height="100%"></iframe>'
+
 
                 });
             }
