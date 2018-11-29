@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="imgPath" property="imgpath" jdbcType="VARCHAR"/>
-        <result column="desc" property="desc" jdbcType="VARCHAR"/>
+        <result column="ldesc" property="ldesc" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="date" property="date" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -17,5 +17,17 @@
     <select id="getConut" resultType="int">
     select count(*) from slide
   </select>
+
+    <update id="updateSlideByidAndstatus">
+        update slide set status=#{status} where id=#{id}
+    </update>
+
+    <insert id="addSilde">
+        insert into slide (title,imgPath,ldesc) values (#{title},#{imgPath},#{ldesc})
+    </insert>
+
+    <delete id="deleteSlide">
+        delete from slide where id=#{id}
+    </delete>
 
 </mapper>

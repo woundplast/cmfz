@@ -14,7 +14,7 @@ public class Slide {
 
     private String imgPath;
 
-    private String desc;
+    private String ldesc;
 
     private Integer status;
 

@@ -5,7 +5,6 @@ import com.ab.cmfz.dao.SlideDao;
 import com.ab.cmfz.dao.UserDao;
 import com.ab.cmfz.entity.Menu;
 import com.ab.cmfz.entity.Slide;
-import com.ab.cmfz.entity.User;
 import com.ab.cmfz.service.SlideService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +33,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
         List<Slide> userByPage = slideDao.getSlideByPage(1, 3);
         System.out.println(userByPage);
 
+
     }
 
     @Test
@@ -47,8 +47,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
 
     @Test
     public void m2() {
-        User user = userDao.selectUserByphoneNumAndPassword("1245", "1245");
-        System.out.println(user);
+        slideDao.updateSlideByidAndstatus(1, 1);
     }
 
 

@@ -35,4 +35,20 @@ public class SlideServiceImpl implements SlideService {
 
         return map;
     }
+
+    @Override
+    public void updateSlideByidAndstatus(int id, int status) {
+        slideDao.updateSlideByidAndstatus(id, status);
+    }
+
+    @Override
+    public void addSilde(Slide slide) {
+        slideDao.addSilde(slide);
+
+    }
+
+    @Override
+    public void deleteSlide(int id) {
+        slideDao.deleteSlide(id);
+    }
 }
