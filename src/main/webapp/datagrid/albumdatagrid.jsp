@@ -19,14 +19,14 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.edatagrid.js"></script>
     <script type="text/javascript">
         var toolbar = [{
-            iconCls: 'icon-add',
-            text: "添加",
+            iconCls: 'icon-tip',
+            text: "专辑详情",
             handler: function () {
                 $("#adddiv").dialog("open");
             }
         }, '-', {
-            iconCls: 'icon-edit',
-            text: "修改",
+            iconCls: 'icon-save',
+            text: "添加专辑",
             handler: function () {
                 /*获取选中行*/
                 var row = $("#slidegdatagrid").edatagrid("getSelected")
@@ -49,8 +49,8 @@
                 }
             }
         }, '-', {
-            iconCls: 'icon-remove',
-            text: "删除",
+            iconCls: 'icon-save',
+            text: "添加章节",
             handler: function () {
                 var row = $("#slidegdatagrid").edatagrid("getSelected");
                 if (row == null) {
@@ -97,8 +97,8 @@
 
             }
         }, '-', {
-            iconCls: 'icon-save',
-            text: "保存",
+            iconCls: 'icon-undo',
+            text: "下载音频",
             handler: function () {
                 $("#albumdatagrid").edatagrid("saveRow");
             }
@@ -107,6 +107,7 @@
         $(function () {
             /*展示全部面板*/
             $('#albumdatagrid').treegrid({
+                toolbar: toolbar,
                 url: '${pageContext.request.contextPath}/queryAllAlbum',
                 idField: 'id',
                 treeField: 'title',
@@ -119,6 +120,8 @@
                 fit: true,
                 fitColumns: true,
                 pagination: true,
+                pageSize: 3,
+                pageList: [3, 6, 9],
             });
         });
 
