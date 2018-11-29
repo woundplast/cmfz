@@ -22,7 +22,26 @@
             iconCls: 'icon-tip',
             text: "专辑详情",
             handler: function () {
+                alert("专辑详情")
                 $("#adddiv").dialog("open");
+                var row = $("#slidegdatagrid").edatagrid("getSelected")
+                if (row == null) {
+                    $.messager.show({
+                        title: '警告',
+                        msg: '请选中修改行。',
+                        showType: 'show',
+                        style: {
+                            right: '',
+                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                            bottom: ''
+                        }
+                    });
+                } else {
+                    /*将当前行变成可编辑模式*/
+                    var index = $("#slidegdatagrid").edatagrid("getRowIndex", row);
+                    $("#slidegdatagrid").edatagrid("editRow", index);
+                    $("#slidegdatagrid").edatagrid("saveRow");
+                }
             }
         }, '-', {
             iconCls: 'icon-save',
