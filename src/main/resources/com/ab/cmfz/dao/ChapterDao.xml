@@ -61,4 +61,8 @@
       </if>
     </trim>
   </insert>
+  <insert id="addChapter">
+    insert into  chapter (id,title,size,duration,downPath,aid)
+    values (unix_timestamp(now()),#{title},#{size},#{duration},#{duration},#{aid})
+  </insert>
 </mapper>

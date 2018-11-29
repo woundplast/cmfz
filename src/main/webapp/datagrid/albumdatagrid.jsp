@@ -55,6 +55,7 @@
             handler: function () {
                 var row = $("#albumdatagrid").edatagrid("getSelected");
                 console.log(row)
+                $("#addChapterForm").form("load", row);
                 $("#addChapterDiv").dialog("open");
 
 
@@ -63,7 +64,12 @@
             iconCls: 'icon-undo',
             text: "下载音频",
             handler: function () {
-                $("#albumdatagrid").edatagrid("saveRow");
+                var row = $("#albumdatagrid").treegrid("getSelected");
+                if (row != null) {
+                    if (row.size != null) {
+                        location.href = "${pageContext.request.contextPath}/download?url=" + row.url + "&title=" + row.title
+                    }
+                }
             }
         }]
         $(function () {
@@ -196,7 +202,7 @@
                             }
                         });
                         $("#albumdatagrid").datagrid("reload");
-                        $("#addAlbumDiv").dialog("close");
+                        $("#addChapterDiv").dialog("close");
                     } else {
                         $.messager.show({
                             title: '提示',
@@ -225,7 +231,7 @@
     <form id="albumform">
         <table border="10" cellspacing="0" align="center" bgcolor="antiquewhite">
             <tr>
-                <td><input type="hidden" name="id"></td>
+                <td><input type="hidden" name="aid"></td>
             </tr>
             <tr>
                 <td>专辑名:</td>
@@ -297,8 +303,9 @@
     <form id="addChapterForm" method="post" enctype="multipart/form-data">
         <table>
             <tr>
+                <input type="hidden" name="id">
                 <td>章节名:</td>
-                <td><input id="ctitle" name="title"></td>
+                <td><input id="ctitle" name="ctitle"></td>
             </tr>
             <tr>
                 <td>章节文件:</td>

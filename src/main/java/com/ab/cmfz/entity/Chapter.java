@@ -11,7 +11,7 @@ public class Chapter {
 
     private Double size;
 
-    private String duration;
+    private Double duration;
 
     private String downPath;
 
