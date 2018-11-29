@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER"/>
     <result column="title" property="title" jdbcType="VARCHAR"/>
     <result column="coverImg" property="coverImg" jdbcType="VARCHAR"/>
-    <result column="count" property="count" jdbcType="INTEGER"/>
+    <result column="acount" property="acount" jdbcType="INTEGER"/>
     <result column="score" property="score" jdbcType="INTEGER"/>
     <result column="author" property="author" jdbcType="VARCHAR"/>
     <result column="brodCast" property="brodCast" jdbcType="VARCHAR"/>
@@ -151,7 +151,7 @@
 
   <select id="queryAllAlbum" resultMap="BaseResultMap">
    SELECT a.id id,a.title title,a.coverImg coverImg,
-    a.count conut,a.score score,
+    a.acount aconut,a.score score,
     a.author author ,a.brodCast brodCast ,
     a.brief brief ,a.publishDate publishDate,
     c.id cid ,c.title ctitle,c.size size ,c.duration duration,
@@ -160,4 +160,9 @@
     from album a LEFT JOIN chapter c
     on a.id=c.aid
   </select>
+
+  <insert id="addAlbum">
+      insert into album(title,coverImg,acount,score,author,brodCast,brief)
+       values (#{title},#{coverImg},#{acount},#{score},#{author},#{brodCast},#{brief})
+    </insert>
 </mapper>

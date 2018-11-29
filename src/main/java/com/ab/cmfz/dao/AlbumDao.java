@@ -18,4 +18,6 @@ public interface AlbumDao {
     int updateByPrimaryKey(Album record);
 
     List<Album> queryAllAlbum();
+
+    void addAlbum(Album album);
 }

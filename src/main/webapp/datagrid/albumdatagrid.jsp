@@ -22,13 +22,12 @@
             iconCls: 'icon-tip',
             text: "专辑详情",
             handler: function () {
-                alert("专辑详情")
                 $("#adddiv").dialog("open");
-                var row = $("#slidegdatagrid").edatagrid("getSelected")
-                if (row == null) {
+                var row = $("#albumdatagrid").edatagrid("getSelected");
+                if (row == null || row.score == null) {
                     $.messager.show({
                         title: '警告',
-                        msg: '请选中修改行。',
+                        msg: '请选中专辑。',
                         showType: 'show',
                         style: {
                             right: '',
@@ -37,82 +36,27 @@
                         }
                     });
                 } else {
-                    /*将当前行变成可编辑模式*/
-                    var index = $("#slidegdatagrid").edatagrid("getRowIndex", row);
-                    $("#slidegdatagrid").edatagrid("editRow", index);
-                    $("#slidegdatagrid").edatagrid("saveRow");
+                    var row = $("#albumdatagrid").edatagrid("getSelected");
+                    $("#albumform").form("load", row);
+                    $("#showImg").prop("src", "${pageContext.request.contextPath}/upload/" + row.coverImg);
+                    $("#albumshow").dialog("open");
+
                 }
             }
         }, '-', {
             iconCls: 'icon-save',
             text: "添加专辑",
             handler: function () {
-                /*获取选中行*/
-                var row = $("#slidegdatagrid").edatagrid("getSelected")
-                if (row == null) {
-                    $.messager.show({
-                        title: '警告',
-                        msg: '请选中修改行。',
-                        showType: 'show',
-                        style: {
-                            right: '',
-                            top: document.body.scrollTop + document.documentElement.scrollTop,
-                            bottom: ''
-                        }
-                    });
-                } else {
-                    /*将当前行变成可编辑模式*/
-                    var index = $("#slidegdatagrid").edatagrid("getRowIndex", row);
-                    $("#slidegdatagrid").edatagrid("editRow", index);
-                    $("#slidegdatagrid").edatagrid("saveRow");
-                }
+                $("#addAlbumDiv").dialog("open");
             }
         }, '-', {
             iconCls: 'icon-save',
             text: "添加章节",
             handler: function () {
-                var row = $("#slidegdatagrid").edatagrid("getSelected");
-                if (row == null) {
-                    $.messager.alert("提示框", "请选中要删除的数据", "warning");
-                } else {
-                    $.messager.confirm("确认框", "确认真的要删除选中的内容吗？", function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "${pageContext.request.contextPath}/deleteSlide",
-                                data: "id=" + row.id,
-                                success: function (data) {
-                                    if (data) {
-                                        $.messager.show({
-                                            title: '提示',
-                                            msg: '删除成功。',
-                                            showType: 'show',
-                                            style: {
-                                                right: '',
-                                                top: document.body.scrollTop + document.documentElement.scrollTop,
-                                                bottom: ''
-                                            }
-                                        });
-                                        $("#slidegdatagrid").datagrid("reload");
-                                    } else {
-                                        $.messager.show({
-                                            title: '提示',
-                                            msg: '删除失败。',
-                                            showType: 'show',
-                                            style: {
-                                                right: '',
-                                                top: document.body.scrollTop + document.documentElement.scrollTop,
-                                                bottom: ''
-                                            }
-                                        });
-                                    }
+                var row = $("#albumdatagrid").edatagrid("getSelected");
+                console.log(row)
+                $("#addChapterDiv").dialog("open");
 
-                                },
-                                dataType: "json"
-
-                            })
-                        }
-                    });
-                }
 
             }
         }, '-', {
@@ -122,7 +66,6 @@
                 $("#albumdatagrid").edatagrid("saveRow");
             }
         }]
-
         $(function () {
             /*展示全部面板*/
             $('#albumdatagrid').treegrid({
@@ -142,12 +85,236 @@
                 pageSize: 3,
                 pageList: [3, 6, 9],
             });
+
+            /*展示面板*/
+            $("#albumshow").dialog({
+                //iconCls:"icon-add",//图标
+                iconCls: "icon-help",//图标
+                title: "添加面板",
+                height: 357,
+                width: 550,
+                resizable: false,//设置面板大小是否可变
+                modal: true,//灯罩效果
+                closed: true,//是否初始化时显示
+            });
+            /*展示面板===EDN===*/
+            /*添加专辑*/
+            $("#addAlbumDiv").dialog({
+                //iconCls:"icon-add",//图标
+                iconCls: "icon-help",//图标
+                title: "添加面板",
+                height: 185,
+                width: 490,
+                resizable: true,//设置面板大小是否可变
+                modal: true,//灯罩效果
+                closed: true,//是否初始化时显示
+            });
+            /*添加专辑===END===*/
+            /*添加章节*/
+            $("#addChapterDiv").dialog({
+                //iconCls:"icon-add",//图标
+                iconCls: "icon-help",//图标
+                title: "添加面板",
+                height: 173,
+                width: 490,
+                resizable: true,//设置面板大小是否可变
+                modal: true,//灯罩效果
+                closed: true,//是否初始化时显示
+            });
+            /*添加章节===END===*/
+            /*添加专辑验证*/
+            $("#ctitle").validatebox({
+                required: true,
+                missingMessage: "不能为空!!",
+            });
+            /*添加专辑验证===END===*/
+
         });
+
+        /*执行添加专辑操作*/
+        function goaddAlbum() {
+            $("#addAlbumForm").form("submit", {
+                url: "${pageContext.request.contextPath}/addAlbum",
+                type: "post",
+                onSubmit: function () {
+                    var OK = $("#addAlbumForm").form("validate");
+                    return OK
+                },
+                success: function (result) {
+                    //alert(result);
+                    if (result) {
+
+                        $.messager.show({
+                            title: '提示',
+                            msg: '添加成功。',
+                            showType: 'show',
+                            style: {
+                                right: '',
+                                top: document.body.scrollTop + document.documentElement.scrollTop,
+                                bottom: ''
+                            }
+                        });
+                        $("#albumdatagrid").datagrid("reload");
+                        $("#addAlbumDiv").dialog("close");
+                    } else {
+                        $.messager.show({
+                            title: '提示',
+                            msg: '添加失败。',
+                            showType: 'show',
+                            style: {
+                                right: '',
+                                top: document.body.scrollTop + document.documentElement.scrollTop,
+                                bottom: ''
+                            }
+                        });
+                    }
+                },
+            })
+        }
+
+        /*执行添加专辑操作===END==*/
+        /*-------*/
+        function goaddChapter() {
+            $("#addChapterForm").form("submit", {
+                url: "${pageContext.request.contextPath}/addChapter",
+                type: "post",
+                onSubmit: function () {
+                    var OK = $("#addChapterForm").form("validate");
+                    return OK
+                },
+                success: function (result) {
+                    //alert(result);
+                    if (result) {
+                        $.messager.show({
+                            title: '提示',
+                            msg: '添加成功。',
+                            showType: 'show',
+                            style: {
+                                right: '',
+                                top: document.body.scrollTop + document.documentElement.scrollTop,
+                                bottom: ''
+                            }
+                        });
+                        $("#albumdatagrid").datagrid("reload");
+                        $("#addAlbumDiv").dialog("close");
+                    } else {
+                        $.messager.show({
+                            title: '提示',
+                            msg: '添加失败。',
+                            showType: 'show',
+                            style: {
+                                right: '',
+                                top: document.body.scrollTop + document.documentElement.scrollTop,
+                                bottom: ''
+                            }
+                        });
+                    }
+                },
+            })
+        }
+
+        /*-------*/
 
     </script>
 </head>
 <body>
 <table id="albumdatagrid"></table>
+
+<%--专辑展示div--%>
+<div id="albumshow">
+    <form id="albumform">
+        <table border="10" cellspacing="0" align="center" bgcolor="antiquewhite">
+            <tr>
+                <td><input type="hidden" name="id"></td>
+            </tr>
+            <tr>
+                <td>专辑名:</td>
+                <td><input name="title"></td>
+                <td>专辑描述:</td>
+                <td><input name="brief"></td>
+            </tr>
+            <tr>
+                <td>专辑集数:</td>
+                <td><input name="acount"></td>
+                <td>专辑评分:</td>
+                <td><input name="score"></td>
+            </tr>
+            <tr>
+                <td>专辑作者:</td>
+                <td><input name="author"></td>
+                <td>专辑播音:</td>
+                <td><input name="brodCast"></td>
+            </tr>
+            <tr>
+                <td>专辑图片:</td>
+                <td colspan="10"><img src="" id="showImg" height="200" width="400"></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+<%--专辑展示div===END===--%>
+
+<%--添加专辑--%>
+<div id="addAlbumDiv">
+    <form id="addAlbumForm" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>专辑名:</td>
+                <td><input id="title" name="title"></td>
+                <td>专辑描述:</td>
+                <td><input id="brief" name="brief"></td>
+            </tr>
+            <tr>
+                <td>专辑集数:</td>
+                <td><input id="acount" name="acount"></td>
+                <td>专辑评分:</td>
+                <td><input id="score" name="score"></td>
+            </tr>
+            <tr>
+                <td>专辑作者:</td>
+                <td><input id="author" name="author"></td>
+                <td>专辑播音:</td>
+                <td><input id="brodCast" name="brodCast"></td>
+            </tr>
+            <tr>
+                <td>专辑图片:</td>
+                <td colspan="3"><input type="file" name="img"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a href="JavaScript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+                       onclick="goaddAlbum()">添加</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<%--添加专辑===END===--%>
+<%--添加章节--%>
+<div id="addChapterDiv">
+    <form id="addChapterForm" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>章节名:</td>
+                <td><input id="ctitle" name="title"></td>
+            </tr>
+            <tr>
+                <td>章节文件:</td>
+                <td colspan="3"><input type="file" name="img"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a href="JavaScript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+                       onclick="goaddChapter()">添加</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</div>
+<%--添加章节===END===--%>
 
 
 </body>

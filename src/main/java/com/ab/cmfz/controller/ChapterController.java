@@ -1,7 +1,8 @@
 package com.ab.cmfz.controller;
 
-import com.ab.cmfz.entity.Album;
-import com.ab.cmfz.service.AlbumService;
+import com.ab.cmfz.entity.Chapter;
+import com.ab.cmfz.service.ChapterService;
+import com.ab.cmfz.util.FileUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,27 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping
-public class AlbumController {
-
+public class ChapterController {
     @Autowired
-    AlbumService albumService;
+    ChapterService chapterService;
 
-    @RequestMapping("/queryAllAlbum")
+    @RequestMapping("/addChapter")
     public @ResponseBody
-    List queryAllMenu() {
-        List<Album> albumList = albumService.queryAllAlbum();
-        System.out.println(albumList + "--------");
-        return albumList;
-
-    }
-
-    @RequestMapping("/addAlbum")
-    public @ResponseBody
-    boolean addAlbum(Album album, HttpServletRequest request, MultipartFile img) {
+    boolean addChapter(Chapter chapter, HttpServletRequest request, MultipartFile img) {
 
         /*
          * 调用业务
@@ -52,21 +42,25 @@ public class AlbumController {
 
 
         String newName = new Date().getTime() + "." + extension;
-        System.out.println(newName);
-
+        System.out.println(newName + "--");
         try {
             img.transferTo(new File(file.getAbsolutePath(), newName));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        FileUtil.getDuration(new File(file.getAbsolutePath() + "/" + newName));
+        long size = img.getSize();
+        double l = size / 1024.0 / 1024.0;
+        System.out.println(l);
 
+
+        //文件大小  时长  名字  url   date
         try {
-            String fileName = img.getOriginalFilename();
-            //获取新文件名
-            album.setCoverImg(newName);
-            System.out.println("----" + album);
-            albumService.addAlbum(album);
+            chapter.setSize(l);
+            chapter.setDownPath(newName);
+            System.out.println("***" + chapter);
+            chapterService.addChapter(chapter);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,5 +68,6 @@ public class AlbumController {
         }
 
     }
+
 
 }

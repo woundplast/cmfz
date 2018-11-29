@@ -13,7 +13,7 @@ public class Album {
 
     private String coverImg;
 
-    private Integer count;
+    private Integer acount;
 
     private Integer score;
 

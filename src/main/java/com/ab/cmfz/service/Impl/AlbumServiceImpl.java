@@ -21,4 +21,9 @@ public class AlbumServiceImpl implements AlbumService {
         //albumDao.queryAllAlbum();
         return albumDao.queryAllAlbum();
     }
+
+    @Override
+    public void addAlbum(Album album) {
+        albumDao.addAlbum(album);
+    }
 }

@@ -6,4 +6,6 @@ public interface ChapterDao {
     int insert(Chapter record);
 
     int insertSelective(Chapter record);
+
+    void addChapter(Chapter chapter);
 }
