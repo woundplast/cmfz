@@ -8,6 +8,7 @@
     <result column="duration" property="duration" jdbcType="VARCHAR"/>
     <result column="downPath" property="downPath" jdbcType="VARCHAR"/>
     <result column="uploadDate" property="uploadDate" jdbcType="TIMESTAMP"/>
+    <result column="aid" property="aid" jdbcType="TIMESTAMP"/>
   </resultMap>
   <insert id="insert" parameterType="com.ab.cmfz.entity.Chapter">
     insert into chapter (id, title, size, 
