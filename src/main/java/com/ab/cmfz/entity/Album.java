@@ -3,6 +3,7 @@ package com.ab.cmfz.entity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Album {
@@ -23,6 +24,8 @@ public class Album {
     private String brief;
 
     private Date publishDate;
+
+    List<Chapter> chapters;
 
 
 }

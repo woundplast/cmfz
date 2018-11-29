@@ -1,5 +1,6 @@
 package com.ab.cmfz;
 
+import com.ab.cmfz.dao.AlbumDao;
 import com.ab.cmfz.dao.MenuDao;
 import com.ab.cmfz.dao.SlideDao;
 import com.ab.cmfz.dao.UserDao;
@@ -20,6 +21,8 @@ public class CmfzApplicationTests extends TmallApplicationTests {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    AlbumDao albumDao;
     @Autowired
     MenuDao menuDao;
     @Autowired
@@ -48,6 +51,11 @@ public class CmfzApplicationTests extends TmallApplicationTests {
     @Test
     public void m2() {
         slideDao.updateSlideByidAndstatus(1, 1);
+    }
+
+    @Test
+    public void m3() {
+        //albumDao.
     }
 
 

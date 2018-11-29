@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ab.cmfz.dao.ChapterDao">
-    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Chapter">
-        <result column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="size" jdbcType="DOUBLE" property="size"/>
-        <result column="duration" jdbcType="VARCHAR" property="duration"/>
-        <result column="downPath" jdbcType="VARCHAR" property="downpath"/>
-        <result column="uploadDate" jdbcType="TIMESTAMP" property="uploaddate"/>
-    </resultMap>
-    <insert id="insert" parameterType="com.ab.cmfz.entity.Chapter">
+  <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Chapter">
+    <result column="id" property="id" jdbcType="VARCHAR"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="size" property="size" jdbcType="DOUBLE"/>
+    <result column="duration" property="duration" jdbcType="VARCHAR"/>
+    <result column="downPath" property="downPath" jdbcType="VARCHAR"/>
+    <result column="uploadDate" property="uploadDate" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.ab.cmfz.entity.Chapter">
     insert into chapter (id, title, size, 
       duration, downPath, uploadDate
       )
@@ -17,106 +17,47 @@
       #{duration,jdbcType=VARCHAR}, #{downpath,jdbcType=VARCHAR}, #{uploaddate,jdbcType=TIMESTAMP}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Chapter">
-        insert into chapter
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="size != null">
-                size,
-            </if>
-            <if test="duration != null">
-                duration,
-            </if>
-            <if test="downpath != null">
-                downPath,
-            </if>
-            <if test="uploaddate != null">
-                uploadDate,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="size != null">
-                #{size,jdbcType=DOUBLE},
-            </if>
-            <if test="duration != null">
-                #{duration,jdbcType=VARCHAR},
-            </if>
-            <if test="downpath != null">
-                #{downpath,jdbcType=VARCHAR},
-            </if>
-            <if test="uploaddate != null">
-                #{uploaddate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Chapter">
-        <result column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="size" jdbcType="DOUBLE" property="size"/>
-        <result column="duration" jdbcType="VARCHAR" property="duration"/>
-        <result column="downPath" jdbcType="VARCHAR" property="downpath"/>
-        <result column="uploadDate" jdbcType="TIMESTAMP" property="uploaddate"/>
-    </resultMap>
-    <insert id="insert" parameterType="com.ab.cmfz.entity.Chapter">
-    insert into chapter (id, title, size, 
-      duration, downPath, uploadDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{size,jdbcType=DOUBLE}, 
-      #{duration,jdbcType=VARCHAR}, #{downpath,jdbcType=VARCHAR}, #{uploaddate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Chapter">
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="downpath != null">
+        downPath,
+      </if>
+      <if test="uploaddate != null">
+        uploadDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=DOUBLE},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
+      </if>
+      <if test="downpath != null">
+        #{downpath,jdbcType=VARCHAR},
+      </if>
+      <if test="uploaddate != null">
+        #{uploaddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
   </insert>
-    <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Chapter">
-        insert into chapter
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="size != null">
-                size,
-            </if>
-            <if test="duration != null">
-                duration,
-            </if>
-            <if test="downpath != null">
-                downPath,
-            </if>
-            <if test="uploaddate != null">
-                uploadDate,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="size != null">
-                #{size,jdbcType=DOUBLE},
-            </if>
-            <if test="duration != null">
-                #{duration,jdbcType=VARCHAR},
-            </if>
-            <if test="downpath != null">
-                #{downpath,jdbcType=VARCHAR},
-            </if>
-            <if test="uploaddate != null">
-                #{uploaddate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
 </mapper>

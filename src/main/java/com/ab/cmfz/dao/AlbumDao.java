@@ -2,6 +2,8 @@ package com.ab.cmfz.dao;
 
 import com.ab.cmfz.entity.Album;
 
+import java.util.List;
+
 public interface AlbumDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface AlbumDao {
     int updateByPrimaryKeySelective(Album record);
 
     int updateByPrimaryKey(Album record);
+
+    List<Album> queryAllAlbum();
 }
