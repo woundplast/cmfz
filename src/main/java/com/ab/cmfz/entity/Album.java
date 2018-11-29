@@ -25,7 +25,7 @@ public class Album {
 
     private Date publishDate;
 
-    List<Chapter> chapters;
+    List<Chapter> children;
 
 
 }

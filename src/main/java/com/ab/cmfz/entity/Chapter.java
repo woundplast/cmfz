@@ -17,7 +17,7 @@ public class Chapter {
 
     private Date uploadDate;
 
-    private int aid;
+    private Integer aid;
 
 
 }

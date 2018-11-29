@@ -11,14 +11,14 @@
     <result column="brodCast" property="brodCast" jdbcType="VARCHAR"/>
     <result column="brief" property="brief" jdbcType="VARCHAR"/>
     <result column="publishDate" property="publishDate" jdbcType="TIMESTAMP"/>
-    <collection property="chapters" ofType="Chapter">
+    <collection property="children" ofType="Chapter">
       <id column="cid" property="id" jdbcType="INTEGER"/>
       <result column="ctitle" property="title" jdbcType="VARCHAR"/>
       <result column="size" property="size" jdbcType="DOUBLE"/>
       <result column="duration" property="duration" jdbcType="VARCHAR"/>
       <result column="downPath" property="downPath" jdbcType="VARCHAR"/>
       <result column="uploadDate" property="uploadDate" jdbcType="TIMESTAMP"/>
-      <result column="aid" property="aid" jdbcType="TIMESTAMP"/>
+      <result column="aid" property="aid" jdbcType="INTEGER"/>
     </collection>
   </resultMap>
   <sql id="Base_Column_List">

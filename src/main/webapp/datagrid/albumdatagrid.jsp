@@ -106,58 +106,20 @@
 
         $(function () {
             /*展示全部面板*/
-            $("#albumdatagrid").edatagrid({
-                toolbar: toolbar,
-                updateUrl: "${pageContext.request.contextPath}/updateSlideByidAndstatus",
-                saveUrl: "",
-                destroyUrl: "${pageContext.request.contextPath}/deleteSlide",
-                url: "${pageContext.request.contextPath}/queryAllAlbum",
-                pagination: true,//分页
-                type: "post",
-                iconCls: "icon-tip",//图标
-                title: "所有用户信息",
+            $('#albumdatagrid').treegrid({
+                url: '${pageContext.request.contextPath}/queryAllAlbum',
+                idField: 'id',
+                treeField: 'title',
                 columns: [[
-                    //{checkbox: true},
-                    {title: "编号", field: "id", hidden: "true"},
-                    {title: "名字", field: "title", width: 100},
-                    {
-                        title: "状态", field: "status", width: 100,
-                        formatter: function (value, row, index) {
-                            if (row.status == 0) {
-                                return "展示";
-                            } else {
-                                return "不展示";
-                            }
-                        },
-                        editor: {
-                            type: "text",
-                            options: {
-                                required: true
-                            }
-                        }
-
-                    },
-                    {title: "路径", field: "imgPath", width: 100},
-                    {title: "时间", field: "date", width: 100}
+                    {title: '名字', field: 'title', width: 180},
+                    {field: 'downPath', title: '下载路径', width: 60, align: 'right'},
+                    {field: 'size', title: '章节大小', width: 80},
+                    {field: 'duration', title: '章节时长', width: 80}
                 ]],
                 fit: true,
                 fitColumns: true,
                 pagination: true,
-                pageSize: 3,
-                pageList: [3, 6, 9],
-                view: detailview,
-                detailFormatter: function (rowIndex, rowData) {
-                    return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/shouye/' + rowData.imgPath + '" style="height:80px;"></td>' +
-                        '<td style="border:0">' +
-                        '<p>时间: ' + rowData.date + '</p>' +
-                        '<p>描述:' + rowData.ldesc + '</p>' +
-                        '<p>路径:' + rowData.imgPath + '</p>' +
-                        '</td>' +
-                        '</tr></table>';
-                }
-
-            })
+            });
         });
 
     </script>
