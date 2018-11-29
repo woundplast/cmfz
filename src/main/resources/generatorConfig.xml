@@ -52,7 +52,11 @@
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是
 实体类名-->
         <table tableName=""></table>
-        <!--<table tableName="slide" domainObjectName="Slide"
+        <!--<table tableName="album" domainObjectName="Album"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <table tableName="chapter" domainObjectName="Chapter"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>-->

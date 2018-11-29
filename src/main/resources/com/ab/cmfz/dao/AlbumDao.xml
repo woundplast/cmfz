@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ab.cmfz.dao.AlbumDao">
+    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Album">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="coverImg" jdbcType="VARCHAR" property="coverImg"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="brodCast" jdbcType="VARCHAR" property="brodCast"/>
+        <result column="brief" jdbcType="VARCHAR" property="brief"/>
+        <result column="publishDate" jdbcType="TIMESTAMP" property="publishDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, title, coverImg, count, score, author, brodCast, brief, publishDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from album
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from album
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ab.cmfz.entity.Album">
+    insert into album (id, title, coverImg, 
+      count, score, author, 
+      brodCast, brief, publishDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{coverimg,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, 
+      #{brodcast,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Album">
+        insert into album
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="coverimg != null">
+                coverImg,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="brodcast != null">
+                brodCast,
+            </if>
+            <if test="brief != null">
+                brief,
+            </if>
+            <if test="publishdate != null">
+                publishDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="brodcast != null">
+                #{brodcast,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="publishdate != null">
+                #{publishdate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ab.cmfz.entity.Album">
+        update album
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                coverImg = #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="brodcast != null">
+                brodCast = #{brodcast,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                brief = #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="publishdate != null">
+                publishDate = #{publishdate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ab.cmfz.entity.Album">
+    update album
+    set title = #{title,jdbcType=VARCHAR},
+      coverImg = #{coverimg,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      brodCast = #{brodcast,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      publishDate = #{publishdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Album">
+        <id column="int" jdbcType="INTEGER" property="int"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="coverImg" jdbcType="VARCHAR" property="coverimg"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="brodCast" jdbcType="VARCHAR" property="brodcast"/>
+        <result column="brief" jdbcType="VARCHAR" property="brief"/>
+        <result column="publishDate" jdbcType="TIMESTAMP" property="publishdate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    int, title, coverImg, count, score, author, brodCast, brief, publishDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from album
+        where int = #{int,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from album
+    where int = #{int,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ab.cmfz.entity.Album">
+    insert into album (int, title, coverImg, 
+      count, score, author, 
+      brodCast, brief, publishDate
+      )
+    values (#{int,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{coverimg,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, 
+      #{brodcast,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ab.cmfz.entity.Album">
+        insert into album
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="int != null">
+                int,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="coverimg != null">
+                coverImg,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="brodcast != null">
+                brodCast,
+            </if>
+            <if test="brief != null">
+                brief,
+            </if>
+            <if test="publishdate != null">
+                publishDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="int != null">
+                #{int,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="brodcast != null">
+                #{brodcast,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="publishdate != null">
+                #{publishdate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ab.cmfz.entity.Album">
+        update album
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="coverimg != null">
+                coverImg = #{coverimg,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="brodcast != null">
+                brodCast = #{brodcast,jdbcType=VARCHAR},
+            </if>
+            <if test="brief != null">
+                brief = #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="publishdate != null">
+                publishDate = #{publishdate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where int = #{int,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ab.cmfz.entity.Album">
+    update album
+    set title = #{title,jdbcType=VARCHAR},
+      coverImg = #{coverimg,jdbcType=VARCHAR},
+      count = #{count,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      brodCast = #{brodcast,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      publishDate = #{publishdate,jdbcType=TIMESTAMP}
+    where int = #{int,jdbcType=INTEGER}
+  </update>
+</mapper>
