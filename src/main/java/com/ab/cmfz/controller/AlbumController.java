@@ -1,7 +1,7 @@
 package com.ab.cmfz.controller;
 
-import com.ab.cmfz.entity.Menu;
-import com.ab.cmfz.service.MenuService;
+import com.ab.cmfz.entity.Album;
+import com.ab.cmfz.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-
 @Controller
 @RequestMapping
-public class MenuController {
+public class AlbumController {
 
     @Autowired
-    MenuService menuService;
+    AlbumService albumService;
 
-    @RequestMapping("/queryAllMenu")
+    @RequestMapping("/queryAllAlbum")
     public @ResponseBody
     List queryAllMenu() {
-        List<Menu> menuList = menuService.queryAll();
-        return menuList;
+        List<Album> albumList = albumService.queryAllAlbum();
+        System.out.println(albumList + "--------");
+        return albumList;
 
     }
 

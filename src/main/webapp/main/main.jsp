@@ -58,7 +58,7 @@
                     closable: true,
                     iconCls: iconCls,
                     //href:"${pageContext.request.contextPath}"+url,
-                    content: '<iframe src="${pageContext.request.contextPath}' + url + '" width="100%" height="100%"></iframe>'
+                    content: '<iframe src="${pageContext.request.contextPath}/datagrid/' + url + '" width="100%" height="100%"></iframe>'
 
 
                 });
