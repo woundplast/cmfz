@@ -24,7 +24,6 @@ public class UserController {
             User user = userService.selectUserByphoneNumAndPassword(phoneNum, password);
             if (user != null) {
 
-                System.out.println("--------------");
                 session.setAttribute("user", user);
                 return "redirect:/main/main.jsp";
 

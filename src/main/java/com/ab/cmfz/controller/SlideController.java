@@ -70,7 +70,6 @@ public class SlideController {
     @RequestMapping("/deleteSlide")
     public @ResponseBody
     boolean deleteSlide(int id) {
-        System.out.println(id + "-----");
         try {
             slideService.deleteSlide(id);
             return true;
