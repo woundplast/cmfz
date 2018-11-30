@@ -87,6 +87,9 @@ public class ChapterController {
         String path = uploadPath + "/" + url;
         File file = new File(path);
 
+        System.out.println("-" + url);
+        //String extension = FilenameUtils.getExtension(img.getOriginalFilename());
+
         String s = title + "." + "mp3";
 
 

@@ -54,9 +54,21 @@
             text: "添加章节",
             handler: function () {
                 var row = $("#albumdatagrid").edatagrid("getSelected");
-                console.log(row)
-                $("#addChapterForm").form("load", row);
-                $("#addChapterDiv").dialog("open");
+                if (row == null || row.score == null) {
+                    $.messager.show({
+                        title: '警告',
+                        msg: '请选中专辑。',
+                        showType: 'show',
+                        style: {
+                            right: '',
+                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                            bottom: ''
+                        }
+                    });
+                } else {
+                    $("#addChapterForm").form("load", row);
+                    $("#addChapterDiv").dialog("open");
+                }
 
 
             }
@@ -65,10 +77,24 @@
             text: "下载音频",
             handler: function () {
                 var row = $("#albumdatagrid").treegrid("getSelected");
-                if (row != null) {
+                console.log("---" + row)
+                if (row == null || row.size == null) {
+                    $.messager.show({
+                        title: '警告',
+                        msg: '请选中章节。',
+                        msg: '请选中章节。',
+                        showType: 'show',
+                        style: {
+                            right: '',
+                            top: document.body.scrollTop + document.documentElement.scrollTop,
+                            bottom: ''
+                        }
+                    });
+                } else {
                     if (row.size != null) {
-                        location.href = "${pageContext.request.contextPath}/download?url=" + row.url + "&title=" + row.title
+                        location.href = "${pageContext.request.contextPath}/download?url=" + row.downPath + "&title=" + row.title
                     }
+
                 }
             }
         }]
@@ -90,6 +116,34 @@
                 pagination: true,
                 pageSize: 3,
                 pageList: [3, 6, 9],
+                //双击事件
+                onDblClickRow: function (rowIndex, rowData) {
+                    var row = $("#albumdatagrid").treegrid("getSelected");
+                    console.log(row.size)
+                    if (row.size != null) {
+
+                        $("#audio").dialog("open")
+                        $("#audio_id").prop("src", "${pageContext.request.contextPath}/upload/" + row.downPath)
+                    } else {
+                        $.messager.show({
+                            title: '警告',
+                            msg: '请选中章节可以播放。',
+                            showType: 'show',
+                            style: {
+                                right: '',
+                                top: document.body.scrollTop + document.documentElement.scrollTop,
+                                bottom: ''
+                            }
+                        });
+                    }
+                },
+            });
+
+            $('#audio').dialog({
+                title: '播放',
+                width: 400,
+                height: 200,
+                closed: true,
             });
 
             /*展示面板*/
@@ -152,7 +206,7 @@
 
                         $.messager.show({
                             title: '提示',
-                            msg: '添加成功。',
+                            msg: '添加专辑成功。',
                             showType: 'show',
                             style: {
                                 right: '',
@@ -160,8 +214,10 @@
                                 bottom: ''
                             }
                         });
-                        $("#albumdatagrid").datagrid("reload");
                         $("#addAlbumDiv").dialog("close");
+                        $("#albumdatagrid").treegrid("reload");
+                        $("#albumshow").dialog("reload")
+
                     } else {
                         $.messager.show({
                             title: '提示',
@@ -179,7 +235,7 @@
         }
 
         /*执行添加专辑操作===END==*/
-        /*-------*/
+        /*----执行添加章节---*/
         function goaddChapter() {
             $("#addChapterForm").form("submit", {
                 url: "${pageContext.request.contextPath}/addChapter",
@@ -193,7 +249,7 @@
                     if (result) {
                         $.messager.show({
                             title: '提示',
-                            msg: '添加成功。',
+                            msg: '添加章节成功。',
                             showType: 'show',
                             style: {
                                 right: '',
@@ -201,7 +257,7 @@
                                 bottom: ''
                             }
                         });
-                        $("#albumdatagrid").datagrid("reload");
+                        $("#albumdatagrid").treegrid("reload");
                         $("#addChapterDiv").dialog("close");
                     } else {
                         $.messager.show({
@@ -322,7 +378,9 @@
 </div>
 </div>
 <%--添加章节===END===--%>
-
+<div id="audio">
+    <audio id="audio_id" src="" autoplay="autoplay" controls="controls" loop="loop"></audio>
+</div>
 
 </body>
 
