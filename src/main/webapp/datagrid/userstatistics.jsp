@@ -29,23 +29,37 @@
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
+    $.ajax({
+        url: "${pageContext.request.contextPath}/",
+        type: "get",
+        dataType: "JSON",
+        success: function (data) {
+            data.data;
+
+        }
+    })
 
     // 指定图表的配置项和数据
     var option = {
         title: {
             text: '持名法州App活跃用户 '
         },
+        //提示框
         tooltip: {},
         legend: {
-            data: ['销量']
+            data: ['注册人数', '注册人数2']
         },
         xAxis: {
             data: ["7天", "15天", "30天", "90天", "半年", "一年"]
         },
         yAxis: {},
         series: [{
-            name: '销量',
+            name: '注册人数',
             type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }, {
+            name: '注册人数2',
+            type: 'line',
             data: [5, 20, 36, 10, 10, 20]
         }]
     };
