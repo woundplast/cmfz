@@ -170,4 +170,8 @@
       insert into album(title,coverImg,acount,score,author,brodCast,brief)
        values (#{title},#{coverImg},#{acount},#{score},#{author},#{brodCast},#{brief})
     </insert>
+
+  <update id="updateAlumAcountById">
+    update  album set acount=#{acount} where id=#{id}
+  </update>
 </mapper>

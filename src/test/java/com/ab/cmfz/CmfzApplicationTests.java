@@ -4,7 +4,6 @@ import com.ab.cmfz.dao.AlbumDao;
 import com.ab.cmfz.dao.MenuDao;
 import com.ab.cmfz.dao.SlideDao;
 import com.ab.cmfz.dao.UserDao;
-import com.ab.cmfz.entity.Album;
 import com.ab.cmfz.entity.Menu;
 import com.ab.cmfz.entity.Slide;
 import com.ab.cmfz.service.SlideService;
@@ -56,11 +55,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
 
     @Test
     public void m3() {
-        List<Album> albums = albumDao.queryAllAlbum(1, 10);
-        for (Album album : albums) {
-            System.out.println(album);
-            System.out.println("-------");
-        }
+        albumDao.updateAlumAcountById(1, 3);
 
     }
 

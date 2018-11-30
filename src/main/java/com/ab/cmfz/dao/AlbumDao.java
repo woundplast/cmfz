@@ -23,4 +23,7 @@ public interface AlbumDao {
     int getConut();
 
     void addAlbum(Album album);
+
+    void updateAlumAcountById(@Param("id") int id, @Param("acount") int acount);
+
 }
