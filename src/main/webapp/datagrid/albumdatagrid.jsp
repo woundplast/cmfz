@@ -332,8 +332,8 @@
                 <td><input id="brief" name="brief"></td>
             </tr>
             <tr>
-                <td>专辑集数:</td>
-                <td><input id="acount" name="acount"></td>
+                <%-- <td>专辑集数:</td>
+                 <td><input id="acount" name="acount"></td>--%>
                 <td>专辑评分:</td>
                 <td><input id="score" name="score"></td>
             </tr>

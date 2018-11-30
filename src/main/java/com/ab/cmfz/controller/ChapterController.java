@@ -1,6 +1,8 @@
 package com.ab.cmfz.controller;
 
+import com.ab.cmfz.entity.Album;
 import com.ab.cmfz.entity.Chapter;
+import com.ab.cmfz.service.AlbumService;
 import com.ab.cmfz.service.ChapterService;
 import com.ab.cmfz.util.FileUtil;
 import org.apache.commons.io.FileUtils;
@@ -25,6 +27,9 @@ import java.util.Date;
 public class ChapterController {
     @Autowired
     ChapterService chapterService;
+
+    @Autowired
+    AlbumService albumService;
 
     @RequestMapping("/addChapter")
     public @ResponseBody
@@ -73,6 +78,15 @@ public class ChapterController {
             chapter.setDownPath(newName);
             System.out.println("***" + chapter);
             chapterService.addChapter(chapter);
+            /*-----*/
+            Album album = albumService.selectByPrimaryKey(aid);
+            System.out.println(album + "**");
+            Integer acount = album.getAcount();
+            acount++;
+            //album.getId();
+            System.out.println("***" + acount);
+            albumService.updateAlumAcountById(aid, acount);
+            /*-------*/
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,6 +18,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Autowired
     AlbumDao albumDao;
 
+
     @Override
     public Map queryAllAlbum(int page, int rows) {
         int start = (page - 1) * rows;
@@ -38,5 +39,15 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public void addAlbum(Album album) {
         albumDao.addAlbum(album);
+    }
+
+    @Override
+    public Album selectByPrimaryKey(Integer id) {
+        return albumDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateAlumAcountById(int id, int acount) {
+        albumDao.updateAlumAcountById(id, acount);
     }
 }

@@ -9,4 +9,10 @@ public interface AlbumService {
     Map queryAllAlbum(int page, int rows);
 
     void addAlbum(Album album);
+
+    Album selectByPrimaryKey(Integer id);
+
+    void updateAlumAcountById(int id, int acount);
+
+
 }

@@ -22,7 +22,7 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, coverImg, count, score, author, brodCast, brief, publishDate
+    id, title, coverImg, acount, score, author, brodCast, brief, publishDate
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
@@ -36,11 +36,11 @@
   </delete>
   <insert id="insert" parameterType="com.ab.cmfz.entity.Album">
     insert into album (id, title, coverImg, 
-      count, score, author, 
+      acount, score, author,
       brodCast, brief, publishDate
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{coverimg,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, 
+      #{acount,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR},
       #{brodcast,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, #{publishdate,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -56,8 +56,8 @@
       <if test="coverimg != null">
         coverImg,
       </if>
-      <if test="count != null">
-        count,
+      <if test="acount != null">
+        acount,
       </if>
       <if test="score != null">
         score,
@@ -85,8 +85,8 @@
       <if test="coverimg != null">
         #{coverimg,jdbcType=VARCHAR},
       </if>
-      <if test="count != null">
-        #{count,jdbcType=INTEGER},
+      <if test="acount != null">
+        #{acount,jdbcType=INTEGER},
       </if>
       <if test="score != null">
         #{score,jdbcType=INTEGER},
@@ -114,8 +114,8 @@
       <if test="coverimg != null">
         coverImg = #{coverimg,jdbcType=VARCHAR},
       </if>
-      <if test="count != null">
-        count = #{count,jdbcType=INTEGER},
+      <if test="acount != null">
+        acount = #{acount,jdbcType=INTEGER},
       </if>
       <if test="score != null">
         score = #{score,jdbcType=INTEGER},
@@ -139,7 +139,7 @@
     update album
     set title = #{title,jdbcType=VARCHAR},
       coverImg = #{coverimg,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
+      acount = #{acount,jdbcType=INTEGER},
       score = #{score,jdbcType=INTEGER},
       author = #{author,jdbcType=VARCHAR},
       brodCast = #{brodcast,jdbcType=VARCHAR},
@@ -167,8 +167,8 @@
   </select>
 
   <insert id="addAlbum">
-      insert into album(title,coverImg,acount,score,author,brodCast,brief)
-       values (#{title},#{coverImg},#{acount},#{score},#{author},#{brodCast},#{brief})
+      insert into album(title,coverImg,score,author,brodCast,brief)
+       values (#{title},#{coverImg},#{score},#{author},#{brodCast},#{brief})
     </insert>
 
   <update id="updateAlumAcountById">
