@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserDao {
 
     User selectUserByphoneNumAndPassword(@Param("phoneNum") String phoneNum, @Param("password") String password);
+
+    /*查询人数*/
+    int getCount(int days);
 }

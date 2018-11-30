@@ -4,4 +4,10 @@
     <select id="selectUserByphoneNumAndPassword" resultType="User">
     select * from user where phoneNum=#{phoneNum} and password=#{password}
   </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(*)
+        from user
+        where DATEDIFF(NOW(), date) &lt; #{days}
+    </select>
 </mapper>

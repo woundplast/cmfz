@@ -1,6 +1,7 @@
 package com.ab.cmfz;
 
 import com.ab.cmfz.controller.UserController;
+import com.ab.cmfz.dao.UserDao;
 import com.ab.cmfz.entity.User;
 import com.ab.cmfz.service.UserService;
 import org.junit.Test;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserTest extends TmallApplicationTests {
     @Autowired
     UserService userService;
+    @Autowired
+    UserDao userDao;
     @Autowired
     UserController userController;
 
@@ -21,6 +24,8 @@ public class UserTest extends TmallApplicationTests {
 
     @Test
     public void m2() {
+        int count = userDao.getCount(7);
+        System.out.println(count);
 
     }
 }
