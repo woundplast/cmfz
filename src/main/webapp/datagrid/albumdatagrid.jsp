@@ -38,6 +38,9 @@
                 } else {
                     var row = $("#albumdatagrid").edatagrid("getSelected");
                     $("#albumform").form("load", row);
+                    console.log("-----" + row);
+                    console.log(row.acount);
+                    console.log(row.title)
                     $("#showImg").prop("src", "${pageContext.request.contextPath}/upload/" + row.coverImg);
                     $("#albumshow").dialog("open");
 
@@ -297,7 +300,7 @@
             </tr>
             <tr>
                 <td>专辑集数:</td>
-                <td><input name="acount"></td>
+                <td><input name="acount"/></td>
                 <td>专辑评分:</td>
                 <td><input name="score"></td>
             </tr>

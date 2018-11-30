@@ -25,6 +25,7 @@ public class AlbumServiceImpl implements AlbumService {
         Map map = new HashMap();
         int conut = albumDao.getConut();
         List<Album> albumList = albumDao.queryAllAlbum(start, pageSize);
+        System.out.println("---" + albumList);
 
         map.put("rows", albumList);
 
