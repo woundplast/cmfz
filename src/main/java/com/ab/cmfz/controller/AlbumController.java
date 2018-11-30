@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping
@@ -24,10 +24,9 @@ public class AlbumController {
 
     @RequestMapping("/queryAllAlbum")
     public @ResponseBody
-    List queryAllMenu() {
-        List<Album> albumList = albumService.queryAllAlbum();
-        System.out.println(albumList + "--------");
-        return albumList;
+    Map queryAllMenu(int page, int rows) {
+        Map map = albumService.queryAllAlbum(page, rows);
+        return map;
 
     }
 

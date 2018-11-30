@@ -1,6 +1,7 @@
 package com.ab.cmfz.dao;
 
 import com.ab.cmfz.entity.Album;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,7 +18,9 @@ public interface AlbumDao {
 
     int updateByPrimaryKey(Album record);
 
-    List<Album> queryAllAlbum();
+    List<Album> queryAllAlbum(@Param("start") int start, @Param("pageSize") int pageSize);
+
+    int getConut();
 
     void addAlbum(Album album);
 }

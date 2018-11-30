@@ -157,8 +157,13 @@
     c.id cid ,c.title ctitle,c.size size ,c.duration duration,
     c.downPath downPath,
     c.uploadDate uploadDate,c.aid aid
-    from album a LEFT JOIN chapter c
+    from (select * from album LIMIT #{start},#{pageSize}) a LEFT JOIN chapter c
     on a.id=c.aid
+
+  </select>
+
+  <select id="getConut" resultType="int">
+    select count(*) from album
   </select>
 
   <insert id="addAlbum">

@@ -2,11 +2,11 @@ package com.ab.cmfz.service;
 
 import com.ab.cmfz.entity.Album;
 
-import java.util.List;
+import java.util.Map;
 
 public interface AlbumService {
 
-    List<Album> queryAllAlbum();
+    Map queryAllAlbum(int page, int rows);
 
     void addAlbum(Album album);
 }

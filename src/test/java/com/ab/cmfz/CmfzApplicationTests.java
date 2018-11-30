@@ -56,7 +56,7 @@ public class CmfzApplicationTests extends TmallApplicationTests {
 
     @Test
     public void m3() {
-        List<Album> albums = albumDao.queryAllAlbum();
+        List<Album> albums = albumDao.queryAllAlbum(1, 10);
         for (Album album : albums) {
             System.out.println(album);
             System.out.println("-------");
