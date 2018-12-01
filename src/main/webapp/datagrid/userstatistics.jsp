@@ -19,8 +19,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.edatagrid.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"></script>
-    <script type="text/javascript">
-    </script>
 </head>
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
