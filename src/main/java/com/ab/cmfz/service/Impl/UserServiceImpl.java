@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -19,5 +24,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectUserByphoneNumAndPassword(String phoneNum, String password) {
         return userDao.selectUserByphoneNumAndPassword(phoneNum, password);
+    }
+
+    @Override
+    public Map getCountByDays(int[] days) {
+        Map map = new HashMap();
+        List counts = new ArrayList();
+        for (int day : days) {
+            int count = userDao.getCount(day);
+            counts.add(count);
+        }
+        map.put("counts", counts);
+        return map;
     }
 }

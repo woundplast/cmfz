@@ -38,9 +38,6 @@
                 } else {
                     var row = $("#albumdatagrid").edatagrid("getSelected");
                     $("#albumform").form("load", row);
-                    console.log("-----" + row);
-                    console.log(row.acount);
-                    console.log(row.title)
                     $("#showImg").prop("src", "${pageContext.request.contextPath}/upload/" + row.coverImg);
                     $("#albumshow").dialog("open");
 
@@ -80,7 +77,6 @@
             text: "下载音频",
             handler: function () {
                 var row = $("#albumdatagrid").treegrid("getSelected");
-                console.log("---" + row)
                 if (row == null || row.size == null) {
                     $.messager.show({
                         title: '警告',
@@ -122,9 +118,7 @@
                 //双击事件
                 onDblClickRow: function (rowIndex, rowData) {
                     var row = $("#albumdatagrid").treegrid("getSelected");
-                    console.log(row.size)
                     if (row.size != null) {
-
                         $("#audio").dialog("open")
                         $("#audio_id").prop("src", "${pageContext.request.contextPath}/upload/" + row.downPath)
                     } else {
@@ -206,7 +200,6 @@
                 success: function (result) {
                     //alert(result);
                     if (result) {
-
                         $.messager.show({
                             title: '提示',
                             msg: '添加专辑成功。',

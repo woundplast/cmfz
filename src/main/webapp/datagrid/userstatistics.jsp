@@ -17,7 +17,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/datagrid-detailview.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.edatagrid.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/china.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"></script>
     <script type="text/javascript">
@@ -30,42 +29,41 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
     $.ajax({
-        url: "${pageContext.request.contextPath}/",
-        type: "get",
+        url: "${pageContext.request.contextPath}/getCountByDays",
+        type: "post",
         dataType: "JSON",
+        data: "days=" + [7, 14, 21],
         success: function (data) {
-            data.data;
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '持名法州App活跃用户 '
+                },
+                //提示框
+                tooltip: {},
+                legend: {
+                    data: ['注册人数', '注册人数2']
+                },
+                xAxis: {
+                    data: ["近一周内", "近两周内", "近三周内"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '注册人数',
+                    type: 'bar',
+                    data: data.counts,
+                }, {
+                    name: '注册人数2',
+                    type: 'line',
+                    data: data.counts,
+                }]
+            };
 
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
         }
     })
 
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: '持名法州App活跃用户 '
-        },
-        //提示框
-        tooltip: {},
-        legend: {
-            data: ['注册人数', '注册人数2']
-        },
-        xAxis: {
-            data: ["7天", "15天", "30天", "90天", "半年", "一年"]
-        },
-        yAxis: {},
-        series: [{
-            name: '注册人数',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }, {
-            name: '注册人数2',
-            type: 'line',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
 </script>
 </body>
 </html>
