@@ -32,4 +32,10 @@ public class User {
     private Date date;
 
 
+    public User(Integer id, String username, String password, Date date) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.date = date;
+    }
 }

@@ -53,9 +53,11 @@ public class UserController {
     @RequestMapping("/selectUserCountAndProvinceBySex")
     public @ResponseBody
     Map selectUserCountAndProvinceBySex(int sex) {
-        //System.out.println("--"+sex);
+        System.out.println("--" + sex);
         Map map = userService.selectUserCountAndProvinceBySex(sex);
-        System.out.println(map);
+        System.out.println("-" + map + "-");
+
+
         return map;
 
     }
