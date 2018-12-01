@@ -49,4 +49,13 @@ public class UserController {
         return map;
 
     }
+
+    @RequestMapping("/selectUserCountAndProvinceBySex")
+    public @ResponseBody
+    Map selectUserCountAndProvinceBySex(int sex) {
+        Map map = userService.selectUserCountAndProvinceBySex(sex);
+        return map;
+
+    }
+
 }

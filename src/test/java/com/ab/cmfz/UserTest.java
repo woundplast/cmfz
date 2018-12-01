@@ -7,11 +7,15 @@ import com.ab.cmfz.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Map;
+
 public class UserTest extends TmallApplicationTests {
     @Autowired
     UserService userService;
     @Autowired
     UserDao userDao;
+
+
     @Autowired
     UserController userController;
 
@@ -24,8 +28,12 @@ public class UserTest extends TmallApplicationTests {
 
     @Test
     public void m2() {
-        int count = userDao.getCount(7);
-        System.out.println(count);
+       /* List<UserDto> userDtos = userDao.selectUserCount(1);
+        for (UserDto userDto : userDtos) {
+            System.out.println("-"+userDto);
+        }*/
+        Map map = userService.selectUserCountAndProvinceBySex(1);
+        System.out.println(map);
 
     }
 }

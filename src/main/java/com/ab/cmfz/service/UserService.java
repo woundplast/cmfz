@@ -10,5 +10,7 @@ public interface UserService {
 
     Map getCountByDays(int[] days);
 
+    Map selectUserCountAndProvinceBySex(int sex);
+
 
 }

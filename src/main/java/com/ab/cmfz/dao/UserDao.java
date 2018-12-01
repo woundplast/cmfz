@@ -1,7 +1,10 @@
 package com.ab.cmfz.dao;
 
 import com.ab.cmfz.entity.User;
+import com.ab.cmfz.entity.UserDto;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserDao {
 
@@ -9,4 +12,11 @@ public interface UserDao {
 
     /*查询人数*/
     int getCount(int days);
+
+    List<UserDto> selectUserCount(int sex);
+
+
+
+
+
 }

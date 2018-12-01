@@ -10,4 +10,11 @@
         from user
         where DATEDIFF(NOW(), date) &lt; #{days}
     </select>
+
+    <select id="selectUserCount" resultType="UserDto">
+        select count(*) value, province name
+        from user
+        where sex = #{sex}
+        group by province
+    </select>
 </mapper>
