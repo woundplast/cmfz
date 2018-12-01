@@ -35,13 +35,13 @@
     option = {
         title: {
             text: '持名法州APP用户分布图',
-            subtext: '2018年12月1日 最新数据',
+            subtext: '2017年6月15日 最新数据',
             left: 'center'
         },
         tooltip: {
             trigger: 'item'
         },
-        // 说明
+// 说明
         legend: {
             orient: 'vertical',
             left: 'left',
@@ -55,7 +55,7 @@
             text: ['高', '低'],           // 文本，默认为数值文本
             calculable: true
         },
-        // 工具箱
+// 工具箱
         toolbox: {
             show: true,
             orient: 'vertical',
@@ -102,23 +102,22 @@
     myChart.setOption(option);
 
     $(function () {
-        $.post("${pageContext.request.contextPath}/selectUserCountAndProvinceBySex?sex=1", function (data) {
-            console.log(data);
+        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex?sex=1", function (data) {
             myChart.setOption({
                 series: [{
-                    // 根据名字对应到相应的系列
+// 根据名字对应到相应的系列
                     name: '男',
-                    data: data.sex
+                    data: data.man,
                 }]
             });
         });
 
-        $.post("${pageContext.request.contextPath}/selectUserCountAndProvinceBySex?sex=0", function (data) {
+        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex?sex=0", function (data) {
             myChart.setOption({
                 series: [{
-                    // 根据名字对应到相应的系列
+// 根据名字对应到相应的系列
                     name: '女',
-                    data: data.sex
+                    data: data.woman,
                 }]
             });
         });

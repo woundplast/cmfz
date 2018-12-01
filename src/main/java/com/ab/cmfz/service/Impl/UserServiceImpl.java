@@ -3,7 +3,6 @@ package com.ab.cmfz.service.Impl;
 
 import com.ab.cmfz.dao.UserDao;
 import com.ab.cmfz.entity.User;
-import com.ab.cmfz.entity.UserDto;
 import com.ab.cmfz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +40,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Map selectUserCountAndProvinceBySex(int sex) {
-        List<UserDto> userDtos = userDao.selectUserCount(sex);
+        /*List<UserDto> userDtos = userDao.selectUserCount(sex);
         Map map = new HashMap();
-        map.put("sex", userDtos);
+        if(sex==1){
+           map.put("man",userDtos);
+        }
+        if(sex==0){
+            map.put("woman",userDtos);
+        }
+        //map.put("sex", userDtos);*/
+        Map map = new HashMap();
+        map.put("man", userDao.selectUserCount(1));
+        map.put("woman", userDao.selectUserCount(0));
         return map;
     }
 }
