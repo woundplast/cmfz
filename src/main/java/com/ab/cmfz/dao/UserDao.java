@@ -18,4 +18,7 @@ public interface UserDao {
     int getCount();
 
     List<User> getUserAll(@Param("start") int start, @Param("pageSize") int pageSize);
+
+
+    User getPasswordByUsername(String username);
 }

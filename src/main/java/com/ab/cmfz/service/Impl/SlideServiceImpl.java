@@ -25,10 +25,7 @@ public class SlideServiceImpl implements SlideService {
         Map map = new HashMap();
         int conut = slideDao.getConut();
         List<Slide> slideByPage = slideDao.getSlideByPage(start, end);
-        System.out.println(start);
-        System.out.println(end);
-        System.out.println(slideDao);
-        System.out.println("-+-" + slideByPage);
+
         map.put("rows", slideByPage);
 
         map.put("total", conut);

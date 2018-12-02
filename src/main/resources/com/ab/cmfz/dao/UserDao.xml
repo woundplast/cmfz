@@ -32,4 +32,10 @@
         from user
         LIMIT #{start},#{pageSize}
     </select>
+
+    <select id="getPasswordByUsername" resultType="User">
+        select *
+        from user
+        where username = #{username}
+    </select>
 </mapper>

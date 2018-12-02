@@ -34,7 +34,6 @@ public class ChapterController {
     @RequestMapping("/addChapter")
     public @ResponseBody
     boolean addChapter(Chapter chapter, HttpServletRequest request, MultipartFile img, String ctitle) {
-        System.out.println("*" + chapter);
         /*
          * 调用业务
          * 获取大小时长
@@ -52,7 +51,6 @@ public class ChapterController {
         String s = Long.toString(new Date().getTime());
 
         String newName = s + "." + extension;
-        System.out.println(newName + "--");
         try {
             img.transferTo(new File(file.getAbsolutePath(), newName));
         } catch (IOException e) {
@@ -62,29 +60,25 @@ public class ChapterController {
         int duration = FileUtil.getDuration(new File(file.getAbsolutePath() + "/" + newName));
         long size = img.getSize();
         double l = size / 1024.0 / 1024.0;
-        System.out.println(l);
 
 
         //文件大小  时长  名字  url   date
         try {
-            System.out.println("***" + chapter.getId());
             int aid = Integer.parseInt(chapter.getId());
             chapter.setId(s);
-            System.out.println(aid + "-----");
             chapter.setAid(aid);
             chapter.setTitle(ctitle);
             chapter.setDuration((double) duration);
             chapter.setSize(l);
             chapter.setDownPath(newName);
-            System.out.println("***" + chapter);
+
             chapterService.addChapter(chapter);
             /*-----*/
             Album album = albumService.selectByPrimaryKey(aid);
-            System.out.println(album + "**");
+
+
             Integer acount = album.getAcount();
             acount++;
-            //album.getId();
-            System.out.println("***" + acount);
             albumService.updateAlumAcountById(aid, acount);
             /*-------*/
             return true;
@@ -101,7 +95,6 @@ public class ChapterController {
         String path = uploadPath + "/" + url;
         File file = new File(path);
 
-        System.out.println("-" + url);
         //String extension = FilenameUtils.getExtension(img.getOriginalFilename());
 
         String s = title + "." + "mp3";

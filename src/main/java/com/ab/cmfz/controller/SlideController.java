@@ -23,7 +23,6 @@ public class SlideController {
     @RequestMapping("/getSlideByPage")
     public @ResponseBody
     Map getSlideByPage(int page, int rows) {
-        System.out.println("--------" + page + rows);
         Map map = slideService.getSileByPage(page, rows);
         return map;
     }

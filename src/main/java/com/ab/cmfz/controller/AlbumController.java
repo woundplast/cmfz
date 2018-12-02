@@ -51,7 +51,7 @@ public class AlbumController {
 
 
         String newName = new Date().getTime() + "." + extension;
-        System.out.println(newName);
+
 
         try {
             img.transferTo(new File(file.getAbsolutePath(), newName));
@@ -64,7 +64,7 @@ public class AlbumController {
             String fileName = img.getOriginalFilename();
             //获取新文件名
             album.setCoverImg(newName);
-            System.out.println("----" + album);
+
             albumService.addAlbum(album);
             return true;
         } catch (Exception e) {

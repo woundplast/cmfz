@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
         Map map = new HashMap();
         int conut = userDao.getCount();
         List<User> userList = userDao.getUserAll(start, pageSize);
-        System.out.println("---" + userList);
 
         map.put("rows", userList);
 
@@ -70,7 +69,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean exportUserData() {
         List<UserDto> userDtoList = userDao.selectUserCount(1);
-        System.out.println("-" + userDtoList);
 
         List<String> titles = Arrays.asList("城市", "数量");
         List<User> userList = Arrays.asList(
@@ -140,7 +138,10 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-
+    @Override
+    public User getPasswordByUsername(String username) {
+        return userDao.getPasswordByUsername(username);
+    }
 
 
 }

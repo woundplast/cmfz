@@ -103,4 +103,26 @@ public class UserController {
     }
 }*/
 
+    @RequestMapping("/userLogin")
+    public @ResponseBody
+    Object userLogin(String username, String password, String cord, HttpSession session) {
+        if (username == null) {
+            System.out.println("-----用户不存在----");
+        } else {
+            User user = userService.getPasswordByUsername(username);
+            if (user.getPassword().equals(password)) {
+                String record = (String) session.getAttribute("record");
+                if (record.equals(cord)) {
+                    System.out.println("------用户信息-------");
+                } else {
+                    System.out.println("---验证码错误----");
+                }
+
+            } else {
+                System.out.println("-------密码错误------");
+            }
+        }
+        return null;
+    }
+
 }
