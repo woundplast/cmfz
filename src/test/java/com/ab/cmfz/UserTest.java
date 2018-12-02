@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTest extends TmallApplicationTests {
@@ -35,7 +37,11 @@ public class UserTest extends TmallApplicationTests {
         for (UserDto userDto : userDtos) {
             System.out.println("-"+userDto);
         }*/
-        //Map map = userService.selectUserCountAndProvinceBySex();
+        int count = userDao.getCount();
+        System.out.println(count);
+        List<User> userAll = userDao.getUserAll(1, 5);
+        System.out.println(userAll);
+        //Map map = userService.getUserAll(1,5);
         //System.out.println(map);
 
     }

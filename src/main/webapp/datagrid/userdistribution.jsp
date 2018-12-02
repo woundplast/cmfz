@@ -72,7 +72,7 @@
                 name: '男',
                 type: 'map',
                 mapType: 'china',
-                roam: false,
+                roam: true,
                 label: {
                     normal: {
                         show: true
@@ -87,6 +87,7 @@
                 name: '女',
                 type: 'map',
                 mapType: 'china',
+                roam: true,
                 label: {
                     normal: {
                         show: true
@@ -102,7 +103,7 @@
     myChart.setOption(option);
 
     $(function () {
-        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex?sex=1", function (data) {
+        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex", function (data) {
             myChart.setOption({
                 series: [{
 // 根据名字对应到相应的系列
@@ -112,12 +113,12 @@
             });
         });
 
-        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex?sex=0", function (data) {
+        $.post("${pageContext.request.contextPath }/selectUserCountAndProvinceBySex", function (data) {
             myChart.setOption({
                 series: [{
 // 根据名字对应到相应的系列
                     name: '女',
-                    data: data.woman,
+                    data: data.women,
                 }]
             });
         });

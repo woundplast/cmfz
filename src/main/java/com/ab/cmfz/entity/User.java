@@ -1,9 +1,15 @@
 package com.ab.cmfz.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     private Integer id;
 
@@ -29,6 +35,8 @@ public class User {
 
     private Integer status;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date date;
 
 
@@ -36,6 +44,14 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.date = date;
+    }
+
+    public User(String username, String province, Integer sex, Integer status, Date date) {
+        this.username = username;
+        this.province = province;
+        this.sex = sex;
+        this.status = status;
         this.date = date;
     }
 }

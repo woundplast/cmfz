@@ -11,12 +11,11 @@ public interface UserDao {
     User selectUserByphoneNumAndPassword(@Param("phoneNum") String phoneNum, @Param("password") String password);
 
     /*查询人数*/
-    int getCount(int days);
+    int getCountByDate(int days);
 
     List<UserDto> selectUserCount(int sex);
 
+    int getCount();
 
-
-
-
+    List<User> getUserAll(@Param("start") int start, @Param("pageSize") int pageSize);
 }

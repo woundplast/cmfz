@@ -52,14 +52,55 @@ public class UserController {
 
     @RequestMapping("/selectUserCountAndProvinceBySex")
     public @ResponseBody
-    Map selectUserCountAndProvinceBySex(int sex) {
-        System.out.println("--" + sex);
-        Map map = userService.selectUserCountAndProvinceBySex(sex);
+    Map selectUserCountAndProvinceBySex() {
+
+        Map map = userService.selectUserCountAndProvinceBySex();
         System.out.println("-" + map + "-");
-
-
         return map;
 
     }
+
+    @RequestMapping("/getUserAll")
+    public @ResponseBody
+    Map getUserAll(int page, int rows) {
+        Map map = userService.getUserAll(page, rows);
+        return map;
+
+    }
+
+    @RequestMapping("/exportUserData")
+    public @ResponseBody
+    boolean exportUserData() {
+
+
+        return false;
+
+    }
+
+/*            try {
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("F://xxxx.xls", "utf-8"));
+    } catch (
+    UnsupportedEncodingException e) {
+        e.printStackTrace();
+    }
+    response.setContentType("application/vnd.ms-excel");
+    OutputStream outputStream = null;
+    try {
+        outputStream = response.getOutputStream();
+    } catch (
+    IOException e) {
+        e.printStackTrace();
+    }
+    try {
+        workbook.write(outputStream);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    try {
+        outputStream.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}*/
 
 }

@@ -2,19 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ab.cmfz.dao.UserDao">
     <select id="selectUserByphoneNumAndPassword" resultType="User">
-    select * from user where phoneNum=#{phoneNum} and password=#{password}
-  </select>
+        select *
+        from user
+        where phoneNum = #{phoneNum}
+          and password = #{password}
+    </select>
 
-    <select id="getCount" resultType="int">
+    <select id="getCountByDate" resultType="int">
         SELECT count(*)
         from user
         where DATEDIFF(NOW(), date) &lt; #{days}
     </select>
 
     <select id="selectUserCount" resultType="UserDto">
-        select count(*) value, province name
+        select count(province) value, province name
         from user
         where sex = #{sex}
         group by province
+    </select>
+
+
+    <select id="getCount" resultType="int">
+        SELECT count(*)
+        from user
+    </select>
+
+    <select id="getUserAll" resultType="User">
+        select *
+        from user
+        LIMIT #{start},#{pageSize}
     </select>
 </mapper>

@@ -10,7 +10,10 @@ public interface UserService {
 
     Map getCountByDays(int[] days);
 
-    Map selectUserCountAndProvinceBySex(int sex);
+    Map selectUserCountAndProvinceBySex();
 
 
+    Map getUserAll(int page, int rows);
+
+    boolean exportUserData();
 }

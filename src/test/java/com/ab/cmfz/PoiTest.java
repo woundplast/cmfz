@@ -179,15 +179,16 @@ public class PoiTest extends TmallApplicationTests {
         for (int i = 0; i < lastNum; i++) {
             HSSFRow row = sheet.getRow(i + 1);
 
-            HSSFCell cell = row.getCell(0);
-            double id = cell.getNumericCellValue();
+            HSSFCell idcell = row.getCell(0);
+            double id = idcell.getNumericCellValue();
 
             HSSFCell Usercell = row.getCell(1);
-            String usernameCellValue = Usercell.getStringCellValue();
+            String username = Usercell.getStringCellValue();
 
-            HSSFCell passwordCell = row.createCell(2);
-            String passwordCellValue = passwordCell.getStringCellValue();
-            System.out.println("*-" + id + "-" + usernameCellValue + "-" + passwordCellValue);
+            HSSFCell passwordCell = row.getCell(2);
+            String password = passwordCell.getStringCellValue();
+
+            System.out.println("*-" + id + "+" + username + "++" + password);
         }
 
 
