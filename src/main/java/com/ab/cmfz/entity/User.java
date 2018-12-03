@@ -31,13 +31,13 @@ public class User {
     private String province;
     @ExcelIgnore
     private String city;
-    @Excel(name = "性别")
+    @Excel(name = "性别", replace = {"男_1", "女_0"}, suffix = "生")
     private Integer sex;
     @ExcelIgnore
     private String sign;
     @ExcelIgnore
     private String headpic;
-    @Excel(name = "状态")
+    @Excel(name = "状态", replace = {"冻结_1", "正常_0"})
     private Integer status;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

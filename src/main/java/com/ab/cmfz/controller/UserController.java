@@ -98,6 +98,12 @@ public class UserController {
 
     }
 
+    @RequestMapping("/UserData")
+    public @ResponseBody
+    void UserData() {
+
+    }
+
     @RequestMapping("/userLogin")
     public @ResponseBody
     Object userLogin(String username, String password, String cord, HttpSession session) {

@@ -92,7 +92,7 @@
                 columns: [[
                     //{checkbox: true},
                     {title: "编号", field: "id", hidden: "true"},
-                    {title: "名字", field: "username", width: 100},
+                    {title: "姓名", field: "username", width: 100},
                     {
                         title: "性别", field: "sex", width: 100,
                         formatter: function (value, row, index) {
@@ -214,23 +214,24 @@
                     姓名：
                 </td>
                 <td>
-                    <input id="title" name="title">
+                    <input id="username" name="username">
                 </td>
             </tr>
             <tr>
                 <td>
-                    路径：
+                    性别：
                 </td>
                 <td>
-                    <input type="file" id="imgPath" name="img">
+                    男<input type="radio" name="sex">
+                    女<input type="radio" id="sex" name="sex">
                 </td>
             </tr>
             <tr>
                 <td>
-                    描述：
+                    城市：
                 </td>
                 <td>
-                    <input id="ldesc" name="ldesc">
+                    <input id="province" name="province">
                 </td>
             </tr>
             <tr>
