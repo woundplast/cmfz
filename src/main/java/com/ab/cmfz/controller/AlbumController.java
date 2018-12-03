@@ -27,13 +27,11 @@ public class AlbumController {
     Map queryAllMenu(int page, int rows) {
         Map map = albumService.queryAllAlbum(page, rows);
         return map;
-
     }
 
     @RequestMapping("/addAlbum")
     public @ResponseBody
     boolean addAlbum(Album album, HttpServletRequest request, MultipartFile img) {
-
         /*
          * 调用业务
          * 获取大小时长
@@ -45,7 +43,6 @@ public class AlbumController {
         if (!file.exists()) {
             file.mkdir();
         }
-
         //测试音乐.MP3   11111111.MP3
         String extension = FilenameUtils.getExtension(img.getOriginalFilename());
 
