@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--专辑-->
 <mapper namespace="com.ab.cmfz.dao.AlbumDao">
-
     <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Album">
     <id column="id" property="id" jdbcType="INTEGER"/>
     <result column="title" property="title" jdbcType="VARCHAR"/>
@@ -23,28 +22,28 @@
       <result column="aid" property="aid" jdbcType="INTEGER"/>
     </collection>
   </resultMap>
-
+    <!--查询专辑分页-->
   <select id="queryAllAlbum" resultMap="BaseResultMap">
-   SELECT a.id id,a.title title,a.coverImg coverImg,
-    a.acount acount,a.score score,
-    a.author author ,a.brodCast brodCast ,
-    a.brief brief ,a.publishDate publishDate,
-    c.id cid ,c.title ctitle,c.size size ,c.duration duration,
-    c.downPath downPath,
-    c.uploadDate uploadDate,c.aid aid
-    from (select * from album LIMIT #{start},#{pageSize}) a LEFT JOIN chapter c
-    on a.id=c.aid
+      SELECT a.id id,a.title title,a.coverImg coverImg,
+      a.acount acount,a.score score,
+      a.author author ,a.brodCast brodCast ,
+      a.brief brief ,a.publishDate publishDate,
+      c.id cid ,c.title ctitle,c.size size ,c.duration duration,
+      c.downPath downPath,
+      c.uploadDate uploadDate,c.aid aid
+      from (select * from album LIMIT #{start},#{pageSize}) a LEFT JOIN chapter c
+      on a.id=c.aid
   </select>
-
+    <!--查询专辑总数量 用于分页-->
   <select id="getConut" resultType="int">
     select count(*) from album
   </select>
-
+    <!--添加专辑-->
   <insert id="addAlbum">
       insert into album(title,coverImg,score,author,brodCast,brief)
        values (#{title},#{coverImg},#{score},#{author},#{brodCast},#{brief})
-    </insert>
-
+   </insert>
+    <!--添加章节时 对应的专辑数量的修改-->
   <update id="updateAlumAcountById">
     update  album set acount=#{acount} where id=#{id}
   </update>
