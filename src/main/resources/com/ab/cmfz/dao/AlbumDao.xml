@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--专辑-->
 <mapper namespace="com.ab.cmfz.dao.AlbumDao">
-  <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Album">
+
+    <resultMap id="BaseResultMap" type="com.ab.cmfz.entity.Album">
     <id column="id" property="id" jdbcType="INTEGER"/>
     <result column="title" property="title" jdbcType="VARCHAR"/>
     <result column="coverImg" property="coverImg" jdbcType="VARCHAR"/>
@@ -22,7 +24,6 @@
     </collection>
   </resultMap>
 
-
   <select id="queryAllAlbum" resultMap="BaseResultMap">
    SELECT a.id id,a.title title,a.coverImg coverImg,
     a.acount acount,a.score score,
@@ -33,7 +34,6 @@
     c.uploadDate uploadDate,c.aid aid
     from (select * from album LIMIT #{start},#{pageSize}) a LEFT JOIN chapter c
     on a.id=c.aid
-
   </select>
 
   <select id="getConut" resultType="int">

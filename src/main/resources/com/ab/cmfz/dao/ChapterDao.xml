@@ -11,10 +11,10 @@
     <result column="aid" property="aid" jdbcType="TIMESTAMP"/>
   </resultMap>
   <insert id="insert" parameterType="com.ab.cmfz.entity.Chapter">
-    insert into chapter (id, title, size, 
+    insert into chapter (id, title, size,
       duration, downPath, uploadDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{size,jdbcType=DOUBLE}, 
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{size,jdbcType=DOUBLE},
       #{duration,jdbcType=VARCHAR}, #{downpath,jdbcType=VARCHAR}, #{uploaddate,jdbcType=TIMESTAMP}
       )
   </insert>

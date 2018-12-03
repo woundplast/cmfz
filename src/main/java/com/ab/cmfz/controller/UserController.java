@@ -107,20 +107,26 @@ public class UserController {
     public @ResponseBody
     Object userLogin(String username, String password, String cord, HttpSession session) {
         if (username == null) {
-            System.out.println("-----用户不存在----");
+            System.out.println("-----用户为空----");
         } else {
-            User user = userService.getPasswordByUsername(username);
-            if (user.getPassword().equals(password)) {
-                String record = (String) session.getAttribute("record");
-                if (record.equals(cord)) {
-                    System.out.println("------用户信息-------");
-                } else {
-                    System.out.println("---验证码错误----");
-                }
 
+            User user = userService.getPasswordByUsername(username);
+            if (user == null) {
+                System.out.println("-----用户不存在---");
             } else {
-                System.out.println("-------密码错误------");
+                if (user.getPassword().equals(password)) {
+                    String record = (String) session.getAttribute("record");
+                    if ("1245".equals(cord)) {
+                        System.out.println("------用户信息-------" + user);
+                    } else {
+                        System.out.println("---验证码错误----");
+                    }
+
+                } else {
+                    System.out.println("-------密码错误------");
+                }
             }
+
         }
         return null;
     }

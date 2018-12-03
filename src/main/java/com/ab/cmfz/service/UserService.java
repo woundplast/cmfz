@@ -15,7 +15,6 @@ public interface UserService {
 
     Map getUserAll(int page, int rows);
 
-    boolean exportUserData();
 
 
     User getPasswordByUsername(String username);
