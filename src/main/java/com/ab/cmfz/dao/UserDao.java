@@ -9,7 +9,6 @@ import java.util.List;
 public interface UserDao {
 
     User selectUserByphoneNumAndPassword(@Param("phoneNum") String phoneNum, @Param("password") String password);
-
     /*查询人数*/
     int getCountByDate(int days);
 
@@ -19,6 +18,7 @@ public interface UserDao {
 
     List<User> getUserAll(@Param("start") int start, @Param("pageSize") int pageSize);
 
-
     User getPasswordByUsername(String username);
+
+    List<User> queryAllUserData();
 }

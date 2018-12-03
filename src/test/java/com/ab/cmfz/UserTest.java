@@ -37,10 +37,8 @@ public class UserTest extends TmallApplicationTests {
         for (UserDto userDto : userDtos) {
             System.out.println("-"+userDto);
         }*/
-        int count = userDao.getCount();
-        System.out.println(count);
-        List<User> userAll = userDao.getUserAll(1, 5);
-        System.out.println(userAll);
+        List<User> userList = userService.queryAllUserData();
+        System.out.println(userList);
         //Map map = userService.getUserAll(1,5);
         //System.out.println(map);
 

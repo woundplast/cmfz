@@ -1,13 +1,20 @@
 package com.ab.cmfz.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.ab.cmfz.entity.User;
 import com.ab.cmfz.service.UserService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -70,38 +77,26 @@ public class UserController {
 
     @RequestMapping("/exportUserData")
     public @ResponseBody
-    boolean exportUserData() {
+    void exportUserData(HttpServletResponse response) {
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment;fileName=User.xls");
+        List<User> list = new ArrayList();
+        List<User> userList = userService.queryAllUserData();
+        for (User user : userList) {
+            list.add(new User(user.getUsername(), user.getSex(), user.getStatus(), user.getProvince(), user.getDate()));
+        }
+        System.out.println(list);
+
+        ExportParams exort = new ExportParams("用户信息", "用户数据");
+        Workbook workbook = ExcelExportUtil.exportExcel(exort, User.class, list);
+        try {
+            workbook.write(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-        return false;
-
     }
-
-/*            try {
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("F://xxxx.xls", "utf-8"));
-    } catch (
-    UnsupportedEncodingException e) {
-        e.printStackTrace();
-    }
-    response.setContentType("application/vnd.ms-excel");
-    OutputStream outputStream = null;
-    try {
-        outputStream = response.getOutputStream();
-    } catch (
-    IOException e) {
-        e.printStackTrace();
-    }
-    try {
-        workbook.write(outputStream);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-    try {
-        outputStream.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}*/
 
     @RequestMapping("/userLogin")
     public @ResponseBody

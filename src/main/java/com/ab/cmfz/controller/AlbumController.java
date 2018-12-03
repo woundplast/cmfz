@@ -45,30 +45,24 @@ public class AlbumController {
         }
         //测试音乐.MP3   11111111.MP3
         String extension = FilenameUtils.getExtension(img.getOriginalFilename());
-
-
         String newName = new Date().getTime() + "." + extension;
-
-
         try {
             img.transferTo(new File(file.getAbsolutePath(), newName));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         try {
             String fileName = img.getOriginalFilename();
             //获取新文件名
             album.setCoverImg(newName);
-
             albumService.addAlbum(album);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-
     }
+
+
 
 }

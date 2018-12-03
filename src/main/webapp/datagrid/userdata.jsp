@@ -28,12 +28,7 @@
             iconCls: 'icon-edit',
             text: "导出",
             handler: function () {
-                /*获取选中行*/
-                alert(0);
-                $.ajax(function () {
-
-                })
-
+                location = "${pageContext.request.contextPath}/exportUserData";
             }
         }, '-', {
             iconCls: 'icon-search',
@@ -87,11 +82,8 @@
 
         $(function () {
             /*展示全部面板*/
-            $("#userdatagrid").edatagrid({
+            $("#userdatagrid").datagrid({
                 toolbar: toolbar,
-                updateUrl: "${pageContext.request.contextPath}/getUserAll",
-                saveUrl: "",
-                destroyUrl: "${pageContext.request.contextPath}/deleteSlide",
                 url: "${pageContext.request.contextPath}/getUserAll",
                 pagination: true,//分页
                 type: "post",
@@ -137,17 +129,7 @@
                 pagination: true,
                 pageSize: 3,
                 pageList: [3, 6, 9],
-                view: detailview,
-                detailFormatter: function (rowIndex, rowData) {
-                    return '<table><tr>' +
-                        '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/shouye/' + rowData.imgPath + '" style="height:80px;"></td>' +
-                        '<td style="border:0">' +
-                        '<p>时间: ' + rowData.date + '</p>' +
-                        '<p>描述:' + rowData.ldesc + '</p>' +
-                        '<p>路径:' + rowData.imgPath + '</p>' +
-                        '</td>' +
-                        '</tr></table>';
-                }
+
 
             })
             /*添加面板*/
