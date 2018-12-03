@@ -21,4 +21,7 @@ public interface UserDao {
     User getPasswordByUsername(String username);
 
     List<User> queryAllUserData();
+
+    /*批量导入*/
+
 }

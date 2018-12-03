@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,13 +79,12 @@ public class UserController {
     void exportUserData(HttpServletResponse response) {
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-Disposition", "attachment;fileName=User.xls");
-        List<User> list = new ArrayList();
+        /*List<User> list = new ArrayList();
         List<User> userList = userService.queryAllUserData();
         for (User user : userList) {
             list.add(new User(user.getUsername(), user.getSex(), user.getStatus(), user.getProvince(), user.getDate()));
-        }
-        System.out.println(list);
-
+        }*/
+        List<User> list = userService.queryAllUserData();
         ExportParams exort = new ExportParams("用户信息", "用户数据");
         Workbook workbook = ExcelExportUtil.exportExcel(exort, User.class, list);
         try {
@@ -98,9 +96,9 @@ public class UserController {
 
     }
 
-    @RequestMapping("/UserData")
+    @RequestMapping("/importUserData")
     public @ResponseBody
-    void UserData() {
+    void importUserData(User user) {
 
     }
 

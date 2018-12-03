@@ -144,13 +144,13 @@
                 closed: true,//是否初始化时显示
             });
             /*标题验证*/
-            $("#title").validatebox({
+            $("#username").validatebox({
                 required: true,
                 missingMessage: "不能为空!!",
             });
             /*标题===END===*/
             /*内容验证*/
-            $("#ldesc").validatebox({
+            $("#province").validatebox({
                 required: true,
                 missingMessage: "不能为空!!",
             });
@@ -160,9 +160,9 @@
 
         /*执行添加*/
         function goAdd() {
-            //alert(0)
+
             $("#addForm").form("submit", {
-                url: "${pageContext.request.contextPath}/addSilde",
+                url: "${pageContext.request.contextPath}/importUserData",
                 type: "post",
                 onSubmit: function () {
                     var OK = $("#addForm").form("validate");
@@ -222,8 +222,8 @@
                     性别：
                 </td>
                 <td>
-                    男<input type="radio" name="sex">
-                    女<input type="radio" id="sex" name="sex">
+                    男<input type="radio" value="1" name="sex" class="sex" checked>
+                    女<input type="radio" value="0" name="sex" class="sex">
                 </td>
             </tr>
             <tr>
