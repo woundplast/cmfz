@@ -8,12 +8,17 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.highlight.*;
+import org.apache.lucene.util.Version;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,21 +31,52 @@ public class ArticalServiceImpl implements ArticalService {
     @Override
     public List<Artical> queryIndex(String params) {
         List<Artical> articals = new ArrayList<>();
+        String[] strings = {"title", "author", "content"};
+        MultiFieldQueryParser multiFieldQueryParser = new MultiFieldQueryParser(Version.LUCENE_44, strings, new IKAnalyzer());
+        Query query = null;
+        int pageSize = 4;
+        int pageNum = 1;
         IndexSearcher indexSearcher = LuceneUtil.getIndexSearcher();
-
         try {
-            TopDocs topDocs = indexSearcher.search(new TermQuery(new Term("content", params)), 100);
+            query = multiFieldQueryParser.parse(params);
+            //制定高亮的样式
+            Formatter formatter = new SimpleHTMLFormatter("<font color='red'>", "</font>");
+            //提供查询关键词
+            Scorer scorer = new QueryTermScorer(query);
+            Highlighter highlighter = new Highlighter(formatter, scorer);
+
+            TopDocs topDocs = indexSearcher.search(query, pageNum * pageSize);
             ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-            for (int i = 0; i < scoreDocs.length; i++) {
+            for (int i = (pageNum - 1) * pageSize; i < scoreDocs.length; i++) {
                 ScoreDoc scoreDoc = scoreDocs[i];
+                float score = scoreDoc.score;
+                ;
                 int doc = scoreDoc.doc;
                 Document document = indexSearcher.doc(doc);
                 Artical artical = getArtFromDoc(document);
+                String title = highlighter.getBestFragment(new IKAnalyzer(), "title", document.get("title"));
+                String author = highlighter.getBestFragment(new IKAnalyzer(), "author", document.get("author"));
+                String content = highlighter.getBestFragment(new IKAnalyzer(), "content", document.get("content"));
+                if (title != null) {
+                    artical.setTitle(title);
+                }
+                if (author != null) {
+                    artical.setAuthor(author);
+                }
+                if (content != null) {
+                    artical.setContent(content);
+                }
+
                 articals.add(artical);
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InvalidTokenOffsetsException e) {
+            e.printStackTrace();
         }
+
 
         return articals;
     }

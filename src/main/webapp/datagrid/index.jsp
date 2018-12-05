@@ -161,9 +161,9 @@
     <script type="text/javascript">
 
         function queryIndex() {
-            alert(0)
+            //alert(0)
             var params = $("#kw").val();
-            alert(params)
+            //alert(params)
 
             $.ajax({
                 url: "${pageContext.request.contextPath}/queryIndex",

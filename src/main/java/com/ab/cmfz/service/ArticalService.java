@@ -1,6 +1,7 @@
 package com.ab.cmfz.service;
 
 import com.ab.cmfz.entity.Artical;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface ArticalService {
 
-    List<Artical> queryIndex(String params);
+    List<Artical> queryIndex(String params) throws InvalidTokenOffsetsException;
 
     void addIndex(Artical artical);
 

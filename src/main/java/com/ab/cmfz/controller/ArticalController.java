@@ -4,6 +4,7 @@ import com.ab.cmfz.entity.Artical;
 import com.ab.cmfz.service.ArticalService;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,7 +96,12 @@ public class ArticalController {
     @RequestMapping("/queryIndex")
     public @ResponseBody
     Map queryIndex(String params) {
-        List<Artical> articals = articalService.queryIndex(params);
+        List<Artical> articals = null;
+        try {
+            articals = articalService.queryIndex(params);
+        } catch (InvalidTokenOffsetsException e) {
+            e.printStackTrace();
+        }
         Map map = new HashMap();
         map.put("articals", articals);
 
