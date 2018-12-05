@@ -5,7 +5,7 @@ import com.ab.cmfz.service.ArticalService;
 import com.ab.cmfz.util.LuceneUtil;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.IndexSearcher;
@@ -25,17 +25,13 @@ public class ArticalServiceImpl implements ArticalService {
 
     @Override
     public List<Artical> queryIndex(String params) {
-        System.out.println("---");
         List<Artical> articals = new ArrayList<>();
         IndexSearcher indexSearcher = LuceneUtil.getIndexSearcher();
-        System.out.println("---" + indexSearcher);
 
         try {
             TopDocs topDocs = indexSearcher.search(new TermQuery(new Term("content", params)), 100);
             ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-            System.out.println("--" + scoreDocs);
             for (int i = 0; i < scoreDocs.length; i++) {
-                System.out.println(scoreDocs[i]);
                 ScoreDoc scoreDoc = scoreDocs[i];
                 int doc = scoreDoc.doc;
                 Document document = indexSearcher.doc(doc);
@@ -106,12 +102,12 @@ public class ArticalServiceImpl implements ArticalService {
 
     public Document getDocFromArt(Artical artical) {
         Document document = new Document();
-        document.add(new StringField("id", artical.getId(), Field.Store.YES));
-        document.add(new StringField("title", artical.getTitle(), Field.Store.YES));
-        document.add(new StringField("author", artical.getAuthor(), Field.Store.YES));
-        document.add(new StringField("content", artical.getContent(), Field.Store.YES));
-        document.add(new StringField("date", artical.getDate(), Field.Store.YES));
-        document.add(new StringField("url", artical.getUrl(), Field.Store.YES));
+        document.add(new TextField("id", artical.getId(), Field.Store.YES));
+        document.add(new TextField("title", artical.getTitle(), Field.Store.YES));
+        document.add(new TextField("author", artical.getAuthor(), Field.Store.YES));
+        document.add(new TextField("content", artical.getContent(), Field.Store.YES));
+        document.add(new TextField("date", artical.getDate(), Field.Store.YES));
+        document.add(new TextField("url", artical.getUrl(), Field.Store.YES));
         return document;
 
     }

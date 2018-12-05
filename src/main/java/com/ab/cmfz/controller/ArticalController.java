@@ -95,9 +95,7 @@ public class ArticalController {
     @RequestMapping("/queryIndex")
     public @ResponseBody
     Map queryIndex(String params) {
-        System.out.println("----" + params);
         List<Artical> articals = articalService.queryIndex(params);
-        System.out.println("----" + articals);
         Map map = new HashMap();
         map.put("articals", articals);
 
@@ -107,7 +105,7 @@ public class ArticalController {
     @RequestMapping("/addIndex")
     public @ResponseBody
     boolean addIndex(Artical artical, HttpServletRequest request, MultipartFile img) {
-        System.out.println(artical + "--" + img);
+
         String realPath = request.getSession().getServletContext().getRealPath("/");  //webapp当前项目的路径
         File file = new File(realPath + "/upload");
         if (!file.exists()) {
