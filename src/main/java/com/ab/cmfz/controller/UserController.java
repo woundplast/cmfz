@@ -1,9 +1,14 @@
 package com.ab.cmfz.controller;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.util.PoiPublicUtil;
 import com.ab.cmfz.entity.User;
+import com.ab.cmfz.entity.UserDto;
 import com.ab.cmfz.service.UserService;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -79,11 +86,6 @@ public class UserController {
     void exportUserData(HttpServletResponse response) {
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-Disposition", "attachment;fileName=User.xls");
-        /*List<User> list = new ArrayList();
-        List<User> userList = userService.queryAllUserData();
-        for (User user : userList) {
-            list.add(new User(user.getUsername(), user.getSex(), user.getStatus(), user.getProvince(), user.getDate()));
-        }*/
         List<User> list = userService.queryAllUserData();
         ExportParams exort = new ExportParams("用户信息", "用户数据");
         Workbook workbook = ExcelExportUtil.exportExcel(exort, User.class, list);
@@ -98,7 +100,35 @@ public class UserController {
 
     @RequestMapping("/importUserData")
     public @ResponseBody
-    void importUserData(User user) {
+    void importUserData(UserDto userDto) {
+        System.out.println("---+" + userDto);
+        userService.addMany(userDto);
+
+           /* try {
+                ImportParams params = new ImportParams();
+                params.setNeedSave(true);
+                List<User> result = ExcelImportUtil.importExcel(
+                        new File(PoiPublicUtil.getWebRootPath("import/imgexcel.xls")),
+                        User.class, params);
+                for (int i = 0; i < result.size(); i++) {
+                    System.out.println(ReflectionToStringBuilder.toString(result.get(i)));
+                }
+                Assert.assertTrue(result.size() == 4);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+
+
+        ImportParams params = new ImportParams();
+        params.setTitleRows(1);
+        params.setHeadRows(1);
+        long start = new Date().getTime();
+        List<User> list = ExcelImportUtil.importExcel(
+                new File(PoiPublicUtil.getWebRootPath("import/ExcelExportMsgClient.xlsx")),
+                User.class, params);
+        System.out.println(new Date().getTime() - start);
+        System.out.println(list.size());
+        System.out.println(ReflectionToStringBuilder.toString(list.get(0)));
 
     }
 

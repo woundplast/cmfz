@@ -77,5 +77,11 @@ public class UserServiceImpl implements UserService {
         return userDao.queryAllUserData();
     }
 
+    @Override
+    public void addMany(UserDto userDto) {
+        userDao.addMay(userDto.getUsers());
+
+    }
+
 
 }

@@ -23,5 +23,6 @@ public interface UserDao {
     List<User> queryAllUserData();
 
     /*批量导入*/
+    void addMay(List<User> users);
 
 }

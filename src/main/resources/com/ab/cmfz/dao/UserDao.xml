@@ -43,4 +43,13 @@
         select *
         from user
     </select>
+    <!--批量导入-->
+    <insert id="addMay">
+        insert into user
+        select t.*
+        from
+        <foreach collection="list" open="(" close=") t" separator=" union " item="users">
+            select #{users.username},#{users.sex},#{users.status},#{users.province},#{users.date} from dual
+        </foreach>
+    </insert>
 </mapper>

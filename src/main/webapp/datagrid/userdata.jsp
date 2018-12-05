@@ -88,7 +88,7 @@
                 pagination: true,//分页
                 type: "post",
                 iconCls: "icon-tip",//图标
-                title: "轮播图",
+                title: "用户",
                 columns: [[
                     //{checkbox: true},
                     {title: "编号", field: "id", hidden: "true"},
@@ -155,6 +155,10 @@
                 missingMessage: "不能为空!!",
             });
             /*内容===END===*/
+
+
+            /*批量添加*/
+
         });
 
 
@@ -200,6 +204,43 @@
         }
 
         /*执行添加===END===*/
+
+        var i = 1;
+
+        function addMany() {
+
+            var td = $("#td1").html("书1:");
+
+            $("#t1").append(
+                " <tr>\n" +
+                "                <td>\n" +
+                "                    姓名：\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <input id=\"username\" name=\"users[" + i + "].username\">\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    性别：\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    男<input type=\"radio\" value=\"1\" name=\"users[" + i + "].sex\" class=\"sex" + i + "\" checked>\n" +
+                "                    女<input type=\"radio\" value=\"0\" name=\"users[" + i + "].sex\" class=\"sex0" + i + "\">\n" +
+                "                </td>\n" +
+                "            </tr>\n" +
+                "            <tr>\n" +
+                "                <td>\n" +
+                "                    城市：\n" +
+                "                </td>\n" +
+                "                <td>\n" +
+                "                    <input id=\"province\" name=\"users[" + i + "].province\">\n" +
+                "                </td>\n" +
+                "            </tr>"
+            );
+            i++;
+
+        }
     </script>
 </head>
 <body>
@@ -208,13 +249,13 @@
 <%--添加div--%>
 <div id="adddiv">
     <form id="addForm" method="post" enctype="multipart/form-data">
-        <table>
+        <table id="t1">
             <tr>
                 <td>
                     姓名：
                 </td>
                 <td>
-                    <input id="username" name="username">
+                    <input id="username" name="users[0].username">
                 </td>
             </tr>
             <tr>
@@ -222,8 +263,8 @@
                     性别：
                 </td>
                 <td>
-                    男<input type="radio" value="1" name="sex" class="sex" checked>
-                    女<input type="radio" value="0" name="sex" class="sex">
+                    男<input type="radio" value="1" name="users[0].sex" class="sex0" checked>
+                    女<input type="radio" value="0" name="users[0].sex" class="sex0">
                 </td>
             </tr>
             <tr>
@@ -231,13 +272,15 @@
                     城市：
                 </td>
                 <td>
-                    <input id="province" name="province">
+                    <input id="province" name="users[0].province">
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
                     <a href="JavaScript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
                        onclick="goAdd()">添加</a>
+                    <input type="button" value="添加多本书籍" class="button" onclick="addMany()"/>
+                    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加多人</a>
                 </td>
             </tr>
         </table>

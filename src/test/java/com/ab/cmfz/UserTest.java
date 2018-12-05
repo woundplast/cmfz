@@ -3,6 +3,7 @@ package com.ab.cmfz;
 import com.ab.cmfz.controller.UserController;
 import com.ab.cmfz.dao.UserDao;
 import com.ab.cmfz.entity.User;
+import com.ab.cmfz.entity.UserDto;
 import com.ab.cmfz.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,12 +37,14 @@ public class UserTest extends TmallApplicationTests {
 
     @Test
     public void m2() {
-       /* List<UserDto> userDtos = userDao.selectUserCount(1);
-        for (UserDto userDto : userDtos) {
-            System.out.println("-"+userDto);
-        }*/
-        List<User> userList = userService.queryAllUserData();
-        System.out.println(userList);
+        User user1 = new User("阿里斯塔", 1, 0, "四川", new Date());
+        List<User> users = new ArrayList<>();
+        users.add(user1);
+        System.out.println("---" + users);
+        UserDto userDto = new UserDto();
+        userDto.setUsers(users);
+        userService.addMany(userDto);
+        System.out.println(11);
         //Map map = userService.getUserAll(1,5);
         //System.out.println(map);
 

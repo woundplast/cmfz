@@ -62,4 +62,10 @@ public class CmfzApplication {
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
     }
+
+    //@Bean
+    //public ArticalDAO getLuceneDAO() {
+    //   return new ArticalDAO();
+    //}
+
 }
