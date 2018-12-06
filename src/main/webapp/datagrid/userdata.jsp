@@ -30,54 +30,7 @@
             handler: function () {
                 location = "${pageContext.request.contextPath}/exportUserData";
             }
-        }, '-', {
-            iconCls: 'icon-search',
-            text: "选择导出",
-            handler: function () {
-                var row = $("#slidegdatagrid").edatagrid("getSelected");
-                if (row == null) {
-                    $.messager.alert("提示框", "请选中要删除的数据", "warning");
-                } else {
-                    $.messager.confirm("确认框", "确认真的要删除选中的内容吗？", function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "${pageContext.request.contextPath}/deleteSlide",
-                                data: "id=" + row.id,
-                                success: function (data) {
-                                    if (data) {
-                                        $.messager.show({
-                                            title: '提示',
-                                            msg: '删除成功。',
-                                            showType: 'show',
-                                            style: {
-                                                right: '',
-                                                top: document.body.scrollTop + document.documentElement.scrollTop,
-                                                bottom: ''
-                                            }
-                                        });
-                                        $("#slidegdatagrid").datagrid("reload");
-                                    } else {
-                                        $.messager.show({
-                                            title: '提示',
-                                            msg: '删除失败。',
-                                            showType: 'show',
-                                            style: {
-                                                right: '',
-                                                top: document.body.scrollTop + document.documentElement.scrollTop,
-                                                bottom: ''
-                                            }
-                                        });
-                                    }
 
-                                },
-                                dataType: "json"
-
-                            })
-                        }
-                    });
-                }
-
-            }
         }]
 
         $(function () {
